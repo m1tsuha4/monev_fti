@@ -1,0 +1,232 @@
+[
+ {
+  "kode_matakuliah": "JSI60202",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Pemograman Multi Platfrom",
+  "jumlah_kelas": 1,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 30,
+  "semester": "7",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI60205",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Sistem Pemerintahan Berbasis Elektr",
+  "jumlah_kelas": 1,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 30,
+  "semester": "7",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI60207",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Perancanaan Strategi TI",
+  "jumlah_kelas": 1,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 30,
+  "semester": "7",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62107",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Interaksi Manusia dan Komputer",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 100,
+  "semester": "4",
+  "jumlah_sks": 4
+ },
+ {
+  "kode_matakuliah": "JSI62108",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Stuktur Data dan Algoritma",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 100,
+  "semester": "2",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62109",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Infastruktur Teknologi Informasi",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 100,
+  "semester": "2",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62110",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Probabilitas dan Statistik",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 100,
+  "semester": "2",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62111",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "kalkulus",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 100,
+  "semester": "2",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62112",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Bahasa Inggris",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 100,
+  "semester": "2",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62120",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Perancangan Basis Data",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62121",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Analisis dan Visualisasi Data",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62122",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Data Mining",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62123",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Keamanan Informasi",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62124",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Sistem Pendukung Keputusan",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62125",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Pemograman Web",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62126",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Rekayasa Perangkat Lunak",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62127",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "ERP",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "4",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62135",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Big Data",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "6",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62136",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Intelegensi Bisnis",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "6",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62137",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Strategi Pengelolaan dan Perolehan",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "6",
+  "jumlah_sks": 3
+ },
+ {
+  "kode_matakuliah": "JSI62138",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Aplikasi Pembelajaran Mesin",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "6",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62139",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Komputasi Awan",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "6",
+  "jumlah_sks": 2
+ },
+ {
+  "kode_matakuliah": "JSI62140",
+  "tahun_kurikulum": 1,
+  "nama_matakuliah": "Audit Sistem Informasi",
+  "jumlah_kelas": 2,
+  "kategori_matakuliah": "teori",
+  "estimasi_mahasiswa": 80,
+  "semester": "6",
+  "jumlah_sks": 2
+ }
+]

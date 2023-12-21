@@ -1,0 +1,17 @@
+[
+ {
+  "kode_prodi": "JSI",
+  "nama_prodi": "sistem informasi",
+  "jenjang_pendidikan": "s1"
+ },
+ {
+  "kode_prodi": "TI",
+  "nama_prodi": "teknik informatika",
+  "jenjang_pendidikan": "s1"
+ },
+ {
+  "kode_prodi": "TK",
+  "nama_prodi": "teknik komputer",
+  "jenjang_pendidikan": "s1"
+ }
+]

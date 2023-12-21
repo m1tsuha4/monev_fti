@@ -1,0 +1,236 @@
+[
+ {
+  "nip_dosen": "195709071992031001",
+  "kode_prodi": "TK",
+  "nama_dosen": "Ir. Werman Kasoep, M.Kom",
+  "jabatan": "Lektor Kepala",
+  "email": "werman@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "196211221989035100",
+  "kode_prodi": "TK",
+  "nama_dosen": "Dr. Eng Rian Ferdian MT",
+  "jabatan": "Ketua Departement",
+  "email": "rian@gmail.com",
+  "password": 12345678,
+  "status": 1
+ },
+ {
+  "nip_dosen": "196211221989035112",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Kak Nindy",
+  "jabatan": "Tata Usaha",
+  "email": "nindy@gmail.com",
+  "password": 12345678,
+  "status": 0
+ },
+ {
+  "nip_dosen": "196404091995121001",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Prof. Surya Afnarius. Ph.D",
+  "jabatan": "Professor",
+  "email": "surya@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "196603091986031001",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Dodon Yendri, M.Kom",
+  "jabatan": "lektor",
+  "email": "dy@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "197503232012121001",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Haris Suryamen, M.Sc",
+  "jabatan": "Asisten Ahli",
+  "email": "haris@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "197804142002122003",
+  "kode_prodi": "TK",
+  "nama_dosen": "Dr. Eng Tati Erlina",
+  "jabatan": "lektor",
+  "email": "tati@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198001102008121002",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Fajril Akbar, M.Sc",
+  "jabatan": "lektor",
+  "email": "fajril@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198103252008122003",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Meza Silvana, MT",
+  "jabatan": "lektor",
+  "email": "meza@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198105052014041001",
+  "kode_prodi": "TI",
+  "nama_dosen": "Dr. Wahyudi, S.T, M.T",
+  "jabatan": "Ketua Departement",
+  "email": "wahyu@gmail.com",
+  "password": 12345678,
+  "status": 1
+ },
+ {
+  "nip_dosen": "198109122014042001",
+  "kode_prodi": "TK",
+  "nama_dosen": "Lathifah Arief, MT",
+  "jabatan": "Asisten Ahli",
+  "email": "latifah@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198112222008121004",
+  "kode_prodi": "TK",
+  "nama_dosen": "Dr. Eng Budi Rahmadya",
+  "jabatan": "lektor",
+  "email": "engbudi@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198201182008121002",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Husnil Kamil, MT",
+  "jabatan": "Ketua Departement",
+  "email": "husnil@gmail.com",
+  "password": 12345678,
+  "status": 1
+ },
+ {
+  "nip_dosen": "198307272008121003",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Hasdi Putra, MT",
+  "jabatan": "lektor",
+  "email": "hasdi12@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198407232008012001",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Rahmi Eka Putri, MT",
+  "jabatan": "lektor",
+  "email": "rahmi@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198410062012121001",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Ricky Akbar, M.Kom",
+  "jabatan": "lektor",
+  "email": "ricky@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198410302008122002",
+  "kode_prodi": "TK",
+  "nama_dosen": "Ratna Aisuwarya, M.Eng",
+  "jabatan": "lektor",
+  "email": "ratna@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198502112008011003",
+  "kode_prodi": "TK",
+  "nama_dosen": "Mohammad Hafiz Hersyah, MT",
+  "jabatan": "lektor",
+  "email": "hafiz@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198904152019031009",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Jefril Rahmadoni, M.Kom",
+  "jabatan": "Asisten Ahli",
+  "email": "jefril@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "198904212019032024",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Afriyanti Dwi Kartika, MT",
+  "jabatan": "Fungsional Umum",
+  "email": "AfriyantiDwi@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "199011032019032008",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Ullya Mega Wahyuni, M.Kom",
+  "jabatan": "Asisten Ahli",
+  "email": "ullie@gmail.com",
+  "password": 12345678,
+  "status": 2
+ },
+ {
+  "nip_dosen": "199104172022031007",
+  "kode_prodi": "TK",
+  "nama_dosen": "Febby Apri Wenando, M.Eng",
+  "jabatan": "Fungsional Umum",
+  "email": "febby@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "199108122019032018",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Dwi Welly Sukma Nirad, MT",
+  "jabatan": "Asisten Ahli",
+  "email": "dwiw@gmail.com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "199111192018032001",
+  "kode_prodi": "TK",
+  "nama_dosen": "Nefy Puteri Novani, MT",
+  "jabatan": "Asisten Ahli",
+  "email": "nefy@gmail.com",
+  "password": 12345678,
+  "status": 2
+ },
+ {
+  "nip_dosen": "199208202019031005",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Adi Arga Arifnur, M.Kom",
+  "jabatan": "Fungsional Umum",
+  "email": "adi@gmail,com",
+  "password": 12345678,
+  "status": 3
+ },
+ {
+  "nip_dosen": "199309292019032022",
+  "kode_prodi": "JSI",
+  "nama_dosen": "Hafizah Hanim, M.Kom",
+  "jabatan": "Asisten Ahli",
+  "email": "hafizah@gmail.com",
+  "password": 12345678,
+  "status": 3
+ }
+]

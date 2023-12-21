@@ -41,13 +41,13 @@
                             <tbody style="font-size:13px;">
                             <?php $no = 1; ?>
                             @forelse($data as $d)
-                            @if($d->kelas_perkuliahan->matakuliah->kode_prodi == $id)
+                            @if($d->kode_prodi == $id)
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td>{{$d->kelas_perkuliahan->tahun_akademik->tahun}}</td>
-                                <td>{{$d->kelas_perkuliahan->matakuliah->nama_matakuliah}}</td>
-                                <td>{{$d->dosen_verifikator->nama}}</td>
-                                <td>{{$d->kelas_perkuliahan->kurikulum}}</td>
+                                <td>{{$d->tahun}}</td>
+                                <td>{{$d->nama_matakuliah}}</td>
+                                <td>{{$d->nama_dosen}}</td>
+                                <td>{{$d->tahun_kurikulum}}</td>
                                 <td>{{$d->tanggal_verifikasi}}</td>
                                 <td>
                                     @if($d->timeline_perkuliahan == 1)
@@ -60,16 +60,16 @@
                                 </td>
                                 <td class="text-center">
                                     @if($d->tanda_tangan_gkm == null)
-                                    <span class="badge badge-warning">Menunggu</span>     
+                                    <span class="badge badge-warning">Menunggu</span>
                                     @else
-                                    <span class="badge badge-success">Selesai</span>                                         
+                                    <span class="badge badge-success">Selesai</span>
                                     @endif
                                 </td>
                                 <td>
                                     @if($d->tanda_tangan_gkm == null)
-                                    <a style="text-decoration:none" href="{{url('/gkm/monev/detail')}}/{{$d->id_hasilverifikasi}}" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
+                                    <a style="text-decoration:none" href="{{url('/gkm/monev/detail')}}/{{$d->id_kelas_perkuliahan}}" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
                                     @else
-                                    <a style="text-decoration:none" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>                                  
+                                    <a style="text-decoration:none" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
                                     @endif
                                 </td>
                             </tr>

@@ -29,7 +29,7 @@
                             <div>Kurikulum</div>
                             <div>Jenis Verifikasi</div>
                             <div>Tanggal Diperiksa</div>
-                            @if($data[0]->hasil_verifikasi->tanda_tangan_gkm == null)
+                            @if($data[0]->tanda_tangan_gkm == null)
                             <button id="verifikasi" class="mt-4 btn btn-sm btn-success"> Verifikasi </button>
                             @else
                             <button class="mt-4 btn btn-sm btn-secondary"> Selesai </button>
@@ -45,22 +45,22 @@
                             <div>:</div>
                         </div>
                         <div class="col-md-9">
-                            <div>{{$data[0]->hasil_verifikasi->kelas_perkuliahan->matakuliah->nama_matakuliah}}</div>
-                            <div>{{$data[0]->hasil_verifikasi->kelas_perkuliahan->dosen_pengampu->nama}}</div>
-                            <div>{{$data[0]->hasil_verifikasi->dosen_verifikator->nama}}</div>
-                            <div>{{$data[0]->hasil_verifikasi->kelas_perkuliahan->tahun_akademik->tahun}} / Semester {{$data[0]->hasil_verifikasi->kelas_perkuliahan->tahun_akademik->semester}}</div>
-                            <div>{{$data[0]->hasil_verifikasi->kelas_perkuliahan->kurikulum}}</div>
+                            <div>{{$data[0]->nama_matakuliah}}</div>
+                            <div>{{$data[0]->nama_pengampu}}</div>
+                            <div>{{$data[0]->dosen_verifikator}}</div>
+                            <div>{{$data[0]->tahun}} / Semester {{$data[0]->semester}}</div>
+                            <div>{{$data[0]->tahun_kurikulum}}</div>
                             <div>
-                                @if($data[0]->hasil_verifikasi->timeline_perkuliahan == 1)
+                                @if($data[0]->timeline_perkuliahan == 1)
                                 Perkuliahan
-                                @elseif($data[0]->hasil_verifikasi->timeline_perkuliahan == 2)
+                                @elseif($data[0]->timeline_perkuliahan == 2)
                                 Soal Ujian Tengah Semester
                                 @else
                                 Soal Ujian Akhir Semester
                                 @endif
                             </div>
                             <div>
-                                {{$data[0]->hasil_verifikasi->tanggal_verifikasi}}
+                                {{$data[0]->tanggal_verifikasi}}
                             </div>
                         </div>
                     </div>
@@ -93,25 +93,25 @@
                             </thead>
                             <tbody style="font-size:13px;">
                             <?php $no = 1; ?>
-                            @forelse($data as $d)
-                            <tr>
-                               <td>{{$no++}}</td>
-                               <td>{{$d->jenis_kelengkapan_berkas->kelengkapan_dokumen}}</td>
-                               <td>{{$d->jenis_kelengkapan_berkas->tipe_penilaian}}</td>
-                               <td>{{$d->penilaian}}</td>
-                               <td>
-                                    @if($d->keterangan == null)
-                                    -
-                                    @else
-                                    {{$d->keterangan}}
-                                    @endif
-                                </td>
-                            </tr>
-                            @empty
-                            <tr>
-                                <td colspan="7">Tidak Ada Data</td>
-                            </tr>
-                            @endforelse
+{{--                            @forelse($dokumen as $d)--}}
+{{--                            <tr>--}}
+{{--                               <td>{{$no++}}</td>--}}
+{{--                               <td>{{$d->jenis_kelengkapan_berkas->kelengkapan_dokumen}}</td>--}}
+{{--                               <td>{{$d->jenis_kelengkapan_berkas->tipe_penilaian}}</td>--}}
+{{--                               <td>{{$d->penilaian}}</td>--}}
+{{--                               <td>--}}
+{{--                                    @if($d->keterangan == null)--}}
+{{--                                    ---}}
+{{--                                    @else--}}
+{{--                                    {{$d->keterangan}}--}}
+{{--                                    @endif--}}
+{{--                                </td>--}}
+{{--                            </tr>--}}
+{{--                            @empty--}}
+{{--                            <tr>--}}
+{{--                                <td colspan="7">Tidak Ada Data</td>--}}
+{{--                            </tr>--}}
+{{--                            @endforelse--}}
                             </tbody>
                         </table>
                     </div>
@@ -160,8 +160,8 @@
 $(document).ready( function () {
     $(document).on('click', '#verifikasi', function() {
         $('#modal').modal('show');
-        
-        $('#form').attr('action', '{{ url('gkm/monev/update') }}/{{$data[0]->id_hasilverifikasi}}');
+
+        $('#form').attr('action', '{{ url('gkm/monev/update') }}/{{$data[0]->id_kelas_perkuliahan}}');
     });
 
     $('#simpan').submit(function(e) {

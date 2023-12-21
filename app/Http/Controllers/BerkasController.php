@@ -401,7 +401,7 @@ class BerkasController extends Controller
 
 
     public function bukti($id){
-        $file = Monitoring::where('id_monitoring',$id)->first();
+        $file = Monitoring::where('pertemuan',$id)->first();
 
         $path = storage_path('app/'. $file->bukti);
 

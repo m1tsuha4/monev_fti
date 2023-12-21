@@ -169,13 +169,42 @@ class MonitoringController extends Controller
 
     public function gkm_index(){
         $id = auth()->user()->kode_prodi;
-        $data = HasilVerifikasi::where('tanda_tangan_verifikator','!=',null)->with('dosen_verifikator','kelas_perkuliahan.matakuliah')->get();
+        $data = DB::table('kelas_perkuliahans')
+            ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
+            ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
+            ->join('dosen','dosen.nip_dosen','=','kelas_perkuliahans.dosen_verifikator')
+            ->join('kurikulums','matakuliahs.tahun_kurikulum','=','kurikulums.id')
+            ->where('tanda_tangan_verifikator','!=',null)
+            ->get();
+//        dd($data);
+//        $data = HasilVerifikasi::where('tanda_tangan_verifikator','!=',null)->with('dosen_verifikator','kelas_perkuliahan.matakuliah')->get();
         return view('GKM.index', compact('data','id'));
     }
 
     public function gkm_detail($id){
-        $data = DetailHasilVerifikator::where('id_hasilverifikasi', $id)->with('hasil_verifikasi.dosen_verifikator','hasil_verifikasi.kelas_perkuliahan.matakuliah','hasil_verifikasi.kelas_perkuliahan.dosen_pengampu','jenis_kelengkapan_berkas')->get();
-        return view('GKM.detail', compact('data'));
+        $data = DB::table('kelas_perkuliahans')
+            ->select(
+                'kelas_perkuliahans.*',
+                'matakuliahs.*',
+                'tahun_akademik.*',
+                'dosen_kelas.*',
+                'dosen_pengampu.nama_dosen AS nama_pengampu',
+                'kelas_perkuliahans.dosen_verifikator AS nip_verifikator',
+                'dosen_verifikator.nama_dosen AS nama_verifikator',
+                'kurikulums.*'
+            )
+            ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
+            ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
+            ->join('dosen_kelas', 'dosen_kelas.id_kelas_perkuliahan', '=', 'kelas_perkuliahans.id_kelas_perkuliahan')
+            ->join('dosen as dosen_pengampu', 'dosen_pengampu.nip_dosen', '=', 'dosen_kelas.nip_dosen')
+            ->join('dosen as dosen_verifikator', 'dosen_verifikator.nip_dosen', '=', 'kelas_perkuliahans.dosen_verifikator')
+            ->join('kurikulums', 'matakuliahs.tahun_kurikulum', '=', 'kurikulums.id')
+            ->where('kelas_perkuliahans.id_kelas_perkuliahan', '=', $id)
+            ->get();
+        $dokumen = DB::table('tipe_penilaian_dokumen')->where('id_kelas_perkuliahan', '=', $id)->get();
+//        dd($data);
+//        $data = DetailHasilVerifikator::where('id_hasilverifikasi', $id)->with('hasil_verifikasi.dosen_verifikator','hasil_verifikasi.kelas_perkuliahan.matakuliah','hasil_verifikasi.kelas_perkuliahan.dosen_pengampu','jenis_kelengkapan_berkas')->get();
+        return view('GKM.detail', compact('data','dokumen'));
     }
 
     public function gkm_update(Request $request, $id){
@@ -185,13 +214,13 @@ class MonitoringController extends Controller
         if ($file != null){
             if ($file->isValid()) {
                 $path = $file->store('public/ttd');
-                HasilVerifikasi::where('id_hasilverifikasi', $id)->update([
+                KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->update([
                     'tanda_tangan_gkm' => $path
                 ]);
 
-                $data = HasilVerifikasi::where('id_hasilverifikasi', $id)->first();
+                $data = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->first();
                 if($data->timeline_perkuliahan == 3){
-                    KelasPerkuliahan::where('id_kelasperkuliahan', $data->id_kelasperkuliahan)->update([
+                    KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->update([
                         'status' => 2
                     ]);
                 }

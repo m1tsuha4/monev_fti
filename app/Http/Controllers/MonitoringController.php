@@ -10,6 +10,8 @@ use App\Models\HasilVerifikasi;
 use App\Models\BerkasDokumen;
 use App\Models\JenisKelengkapanDokumen;
 use App\Models\DetailHasilVerifikator;
+use App\Models\JenisSoalUjian;
+use App\Models\TipePenilaianSoal;
 use Carbon\Carbon;
 use DB;
 
@@ -98,33 +100,40 @@ class MonitoringController extends Controller
 
     public function verifikator_detail($id){
         $data = KelasPerkuliahan::where('id_kelas_perkuliahan',$id)->first();
+        $data_soal = BerkasDokumen::where('id_kelas_perkuliahan',$id)->latest()->first();
+        // dd($data_soal);
         // $berkas = BerkasDokumen::join('kategoriberkas','kategoriberkas.id','=','berkasdokumens.id_kategori_berkas')->where([['kategori',$data->timeline_perkuliahan],['id_kelas_perkuliahan',$data->id_kelas_perkuliahan]])
         //             ->get();
 
         if($data->timeline_perkuliahan == 1){
 //            $berkas = BerkasDokumen::where([['id_kelasperkuliahan',$data->id_kelasperkuliahan],['id_kategori_berkas','!=','B04'],['id_kategori_berkas','!=','B05']])->with('kategori_berkas')->get();
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
-            $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
-            $kategori = JenisKelengkapanDokumen::where('tipe_penilaian','=','Kelengkapan Dokumen RPS')->get();
+            // $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
+            $kategori = JenisKelengkapanDokumen::get();
+            return view('Dosen.Verifikator.detail', compact('data','berkas','kategori'));
         }else if($data->timeline_perkuliahan == 2){
-            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
+            // $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
-            $kategori = JenisKelengkapanDokumen::where('tipe_penilaian','!=','Kelengkapan Dokumen RPS')->get();
+            $kategori_soal = JenisSoalUjian::get();
+            // dd($kategori_soal);
+            return view('Dosen.Verifikator.detail', compact('data','data_soal','berkas_soal','kategori_soal'));
         }else{
-            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
+            // $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
-            $kategori = JenisKelengkapanDokumen::where('tipe_penilaian','!=','Kelengkapan Dokumen RPS')->get();
+            $kategori_soal = JenisSoalUjian::get();
+            return view('Dosen.Verifikator.detail', compact('data','data_soal','berkas_soal','kategori_soal'));
         }
 //        dd($kategori);
         // echo $berkas;
 
-        return view('Dosen.Verifikator.detail', compact('data','berkas', 'berkas_soal','kategori'));
+        // return view('Dosen.Verifikator.detail', compact('data','berkas', 'berkas_soal','kategori'));
     }
 
     public function verifikator_update(Request $request){
         if($request->id_kategori_berkas !== null || $request->id_kategori_berkas !== ""){
             BerkasDokumen::where([['id_soal',$request->id_kategori_berkas],['id_kelas_perkuliahan',$request->id_kelas_perkuliahan]])->update([
                 'status' => $request->status,
+                'keterangan' => $request->keterangan
             ]);
         }
         if($request->id_kategori_berkas === null || $request->id_kategori_berkas === ""){
@@ -138,15 +147,27 @@ class MonitoringController extends Controller
     }
 
     public function verifikator_create(Request $request){
-        for($a = 0; $a < sizeof($request->nilai); $a++){
-            DetailHasilVerifikator::create([
-                'id_kelas_perkuliahan' => $request->id_hasil_verifikator,
-                'id_jenis_kelengkapan_dokumen' => $request->id_jenis_penilaian[$a],
-                'penilaian' => $request->nilai[$a],
-                'keterangan' => $request->keterangan[$a],
-            ]);
+        // dd($request->id_soal);
+        if($request->id_soal !== null && $request->id_soal !== "" ){
+            for($a = 0; $a < sizeof($request->nilai); $a++){
+                TipePenilaianSoal::create([
+                    'id_form_validasisoal' => $request->id_jenis_penilaian[$a],
+                    'id_soal' => $request->id_soal,
+                    'penilaian_soal' => $request->nilai[$a],
+                    'keterangan' => $request->keterangan[$a],
+                ]);
+            }
+        } else {
+            for($a = 0; $a < sizeof($request->nilai); $a++){
+                DetailHasilVerifikator::create([
+                    'id_kelas_perkuliahan' => $request->id_hasil_verifikator,
+                    'id_jenis_kelengkapan_dokumen' => $request->id_jenis_penilaian[$a],
+                    'penilaian' => $request->nilai[$a],
+                    'keterangan' => $request->keterangan[$a],
+                ]);
+            }
         }
-
+        
         $now = Carbon::now();
 
         $file = $request->file('file');
@@ -201,7 +222,11 @@ class MonitoringController extends Controller
             ->join('kurikulums', 'matakuliahs.tahun_kurikulum', '=', 'kurikulums.id')
             ->where('kelas_perkuliahans.id_kelas_perkuliahan', '=', $id)
             ->get();
-        $dokumen = DB::table('tipe_penilaian_dokumen')->where('id_kelas_perkuliahan', '=', $id)->get();
+        $dokumen = DB::table('tipe_penilaian_dokumen')
+                ->join('form_kelengkapan_dokumen','form_kelengkapan_dokumen.id_jenis_kelengkapan_dokumen','=','tipe_penilaian_dokumen.id_jenis_kelengkapan_dokumen')
+                ->where('id_kelas_perkuliahan', '=', $id)
+                ->get();
+        // $soal = DB::table('tipe_penilaian_soal')->where('id_kelas_perkuliahan', '=', $id)->get();
 //        dd($data);
 //        $data = DetailHasilVerifikator::where('id_hasilverifikasi', $id)->with('hasil_verifikasi.dosen_verifikator','hasil_verifikasi.kelas_perkuliahan.matakuliah','hasil_verifikasi.kelas_perkuliahan.dosen_pengampu','jenis_kelengkapan_berkas')->get();
         return view('GKM.detail', compact('data','dokumen'));

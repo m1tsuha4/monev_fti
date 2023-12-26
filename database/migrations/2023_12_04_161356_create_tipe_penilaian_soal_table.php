@@ -17,8 +17,8 @@ class CreateTipePenilaianSoalTable extends Migration
             $table->engine = 'InnoDB'; // <- add this
             $table->string('id_form_validasisoal')->length(3);
             $table->integer('id_soal');
-            $table->enum('penilaian_soal',['Ada','Tidak Ada']);
-            $table->string('keterangan')->length(20);
+            $table->enum('penilaian_soal',['Ada','Tidak Ada','Sesuai','Tidak Sesuai']);
+            $table->string('keterangan')->length(20)->nullable();
             $table->timestamps();
             $table->primary(['id_form_validasisoal', 'id_soal']);
         });

@@ -47,6 +47,7 @@
                             <?php
                                 $no = 1;
                             ?>
+                            @if(isset($berkas))
                             @forelse($berkas as $b)
                                 <tr>
                                     <td>{{$no++}}</td>
@@ -111,33 +112,31 @@
                                     <td colspan="6">Tidak Ada Ada</td>
                                 </tr>
                             @endforelse
-
-                            @forelse($berkas_soal as $bs)
+                            @endif
+                            @if(isset($berkas_soal))
+                          
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td>Berkas Soal</td>
+                                    <td>Berkas Soal {{$data_soal->nama_soal}}</td>
                                     {{--                                        <td>{{$b->tanggal_upload}}</td>--}}
                                     <td class="text-center">
-                                        <a id="pdf" href="#" data-id="{{$bs->id_soal }}" data-id1="{{$bs->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
+                                        <a id="pdf" href="#" data-id="{{$data_soal->id_soal }}" data-id1="{{$data_soal->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
                                     </td>
                                     <td class="text-center">
-                                        @if($bs->status == 1)
+                                        @if($data_soal->status == 1)
                                             <span class="badge badge-warning">Need Action</span>
-                                        @elseif($bs->status == 2)
+                                        @elseif($data_soal->status == 2)
                                             <span class="badge badge-success">Accept</span>
                                         @else
                                             <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a style="text-decoration:none" href="#" data-id="{{$bs->id_soal}}" data-nama="{{$bs->id_kelas_perkuliahan}}" data-id1="{{$bs->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
+                                        <a style="text-decoration:none" href="#" data-id="{{$data_soal->id_soal}}" data-nama="{{$data_soal->id_kelas_perkuliahan}}" data-id1="{{$data_soal->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
                                     </td>
                                 </tr>
-                            @empty
-                                <tr class="text-center">
-                                    <td colspan="6">Tidak Ada Ada</td>
-                                </tr>
-                            @endforelse
+                           
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -204,8 +203,9 @@
                 <div class="modal-body">
                     {{Form::open(array('method' => 'POST', 'id' => 'form1', 'files' => 'true'))}}
                     {{ csrf_field() }}
-
+                    @if(isset($kategori))
                     <input type="hidden" name="id_hasil_verifikator" id="id_hasil_verifikator" value="{{ $data->id_kelas_perkuliahan }}">
+                    <!-- <input type="hidden" name="id_soal" id="id_soal" value="0"> -->
 
                     @foreach($kategori as $k)
 
@@ -217,7 +217,7 @@
 
                     <div class="form-group" id="div_nama">
                         {{Form::label('text', 'Nilai :', ['class' => 'awesome'])}}
-                        {{Form::select('nilai[]',['Ada' => 'Ada','Tidak Ada' => 'Tidak Ada','Cukup' => 'Cukup','Baik' => 'Baik','Sangat Baik' => 'Sangat Baik','Sesuai' => 'Sesuai','Tidak Sesuai' => 'Tidak Sesuai'],null,['class' => 'form-control', 'id' => 'nilai','required' => 'true'])}}
+                        {{Form::select('nilai[]',['Ada' => 'Ada','Tidak Ada' => 'Tidak Ada','Cukup' => 'Cukup','Baik' => 'Baik','Sangat Baik' => 'Sangat Baik'],null,['class' => 'form-control', 'id' => 'nilai','required' => 'true'])}}
                     </div>
 
                     <div class="form-group" id="div_nama">
@@ -231,7 +231,37 @@
                         {{Form::label('text', 'Tanda Tangan Verifikator :', ['class' => 'awesome'])}}
                         <input type="file" class="form-control" name="file" id="file" required>
                     </div>
+                    @endif
 
+                    @if(isset($kategori_soal) && count($kategori_soal) > 0)
+                    <input type="hidden" name="id_hasil_verifikator" id="id_hasil_verifikator" value="{{ $data->id_kelas_perkuliahan }}">
+                    <input type="hidden" name="id_soal" id="id_soal" value="{{ $data_soal->id_soal }}">
+
+                    @foreach($kategori_soal as $k)
+
+                    <div class="form-group" id="div_nama">
+                        {{Form::label('text', 'Kategori Penilaian :', ['class' => 'awesome'])}}
+                        <input type="text" name="kategori_penilaian[]" id="kategori_penilaian" value="{{$k->kriteria_penilaian}}" class="form-control" readonly>
+                        <input type="hidden" name="id_jenis_penilaian[]" id="id_jenis_penilaian" value="{{$k->id_form_validasisoal }}">
+                    </div>
+
+                    <div class="form-group" id="div_nama">
+                        {{Form::label('text', 'Nilai :', ['class' => 'awesome'])}}
+                        {{Form::select('nilai[]',['Ada' => 'Ada','Tidak Ada' => 'Tidak Ada','Sesuai' => 'Sesuai','Tidak Sesuai' => 'Tidak Sesuai'],null,['class' => 'form-control', 'id' => 'nilai','required' => 'true'])}}
+                    </div>
+
+                    <div class="form-group" id="div_nama">
+                        {{Form::label('text', 'Keterangan :', ['class' => 'awesome'])}}
+                        {{Form::text('keterangan[]','',['class' => 'form-control', 'id' => 'keterangan', 'placeholder' => 'Keterangan ...'])}}
+                    </div>
+
+                    @endforeach
+
+                    <div class="form-group" id="div_nama">
+                        {{Form::label('text', 'Tanda Tangan Verifikator :', ['class' => 'awesome'])}}
+                        <input type="file" class="form-control" name="file" id="file" required>
+                    </div>
+                    @endif
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

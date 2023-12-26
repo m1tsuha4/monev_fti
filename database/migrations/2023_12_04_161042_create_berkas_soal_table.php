@@ -20,6 +20,7 @@ class CreateBerkasSoalTable extends Migration
             $table->string('nama_soal')->length(30);
             $table->string('file_soal')->length(255);
             $table->integer('status')->default(0);
+            $table->string('keterangan')->length(50)->nullable();
             $table->timestamps();
         });
         Schema::table('berkas_soal', function (Blueprint $table) {

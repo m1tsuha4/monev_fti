@@ -93,25 +93,25 @@
                             </thead>
                             <tbody style="font-size:13px;">
                             <?php $no = 1; ?>
-{{--                            @forelse($dokumen as $d)--}}
-{{--                            <tr>--}}
-{{--                               <td>{{$no++}}</td>--}}
-{{--                               <td>{{$d->jenis_kelengkapan_berkas->kelengkapan_dokumen}}</td>--}}
-{{--                               <td>{{$d->jenis_kelengkapan_berkas->tipe_penilaian}}</td>--}}
-{{--                               <td>{{$d->penilaian}}</td>--}}
-{{--                               <td>--}}
-{{--                                    @if($d->keterangan == null)--}}
-{{--                                    ---}}
-{{--                                    @else--}}
-{{--                                    {{$d->keterangan}}--}}
-{{--                                    @endif--}}
-{{--                                </td>--}}
-{{--                            </tr>--}}
-{{--                            @empty--}}
-{{--                            <tr>--}}
-{{--                                <td colspan="7">Tidak Ada Data</td>--}}
-{{--                            </tr>--}}
-{{--                            @endforelse--}}
+                            @forelse($dokumen as $d)
+                            <tr>
+                               <td>{{$no++}}</td>
+                               <td>{{$d->point_penilaian_kelengkapan_dokumen}}</td>
+                               <td>{{$d->tipe_penilaian}}</td>
+                               <td>{{$d->penilaian}}</td>
+                               <td>
+                                    @if($d->keterangan == null)
+                                    -
+                                    @else
+                                    {{$d->keterangan}}
+                                    @endif
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="7">Tidak Ada Data</td>
+                            </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -69,6 +69,14 @@
                     {{ csrf_field() }}
 
                     <div class="form-group" id="div_nama">
+                        {{Form::label('text', 'Jenis Kelengkapan Berkas :', ['class' => 'awesome'])}}
+                        <select name="jenis_kelengkapan" id="jenis_kelengkapan" class="form-control">
+                            <option value="1">Kelengkapan Dokumen</option>
+                            <option value="2">Kelengkapan Soal</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" id="div_nama">
                         {{Form::label('text', 'Kelengkapan Dokumen :', ['class' => 'awesome'])}}
                         {{Form::text('kelengkapan_dokumen','',['class' => 'form-control', 'id' => 'kelengkapan_dokumen', 'placeholder' => 'Nama Kelengkapan Dokumen ...'])}}
                     </div>
@@ -125,6 +133,7 @@ $(document).ready( function () {
 
     $(document).on('click', '#add', function() {
         $('#modal').modal('show');
+        $('#jenis_kelengkapan').val("");
         $('#kelengkapan_dokumen').val("");
         $('#tipe_penilaian').val("");
         $('#form').attr('action', '{{ url('jurusan/kategori-penilaian/create') }}');

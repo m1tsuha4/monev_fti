@@ -33,7 +33,7 @@
                                     <th>Dosen Pengampu</th>
                                     <th>Tahun Akademik</th>
                                     <th>Timeline</th>
-                                    <th>Status</th>
+                                    <!-- <th>Status</th> -->
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -57,13 +57,13 @@
                                             UAS
                                             @endif
                                         </td>
-                                        <td class="text-center">
+                                        <!-- <td class="text-center">
                                             @if($d->status == 1)
                                             <span class="badge badge-warning">Menunggu</span>
                                             @elseif($d->status == 2)
                                             <span class="badge badge-success">Selesai</span>
                                             @endif
-                                        </td>
+                                        </td> -->
                                         <td class="text-center">
                                             <a style="text-decoration:none" href="{{url('/dosen/monev/detail')}}/{{$d->id_kelas_perkuliahan}}" data-id="{{$d->id_kelas_perkuliahan}}" data-id1="{{$d->timeline_perkuliahan}}" id="detail" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
                                         </td>

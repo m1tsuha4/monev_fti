@@ -189,11 +189,22 @@ class KelasPerkuliahanController extends Controller
 
     public function dosen_detail($id){
         $kelas = KelasPerkuliahan::where('id_kelas_perkuliahan',$id)->first();
-        $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
-        $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
+        // $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
+        // $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
+
+        if($kelas->timeline_perkuliahan == 1){
+            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
+            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas'));
+        }else if($kelas->timeline_perkuliahan == 2){
+            $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
+            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas_soal'));
+        }else{
+            $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
+            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas_soal'));
+        }
 //        $kategori = KategoriBerkas::whereNotIn('kategori_berkas',[1])->get();
 //        $berkas = BerkasDokumen::where('id_kelasperkuliahan',$id)->with('kategori_berkas')->get();
-        return view('Dosen.Perkuliahan.detail', compact('kelas','berkas','berkas_soal'));
+        
     }
 
     // End Dosen

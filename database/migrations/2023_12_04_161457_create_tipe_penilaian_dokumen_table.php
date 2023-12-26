@@ -17,8 +17,8 @@ class CreateTipePenilaianDokumenTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('id_jenis_kelengkapan_dokumen', 3);
             $table->integer('id_kelas_perkuliahan');
-            $table->enum('penilaian',['Cukup','Baik','Sangat Baik']);
-            $table->string('keterangan', 20);
+            $table->enum('penilaian',['Ada','Tidak Ada','Cukup','Baik','Sangat Baik']);
+            $table->string('keterangan', 20)->nullable();
             $table->timestamps();
             $table->primary(['id_jenis_kelengkapan_dokumen', 'id_kelas_perkuliahan'], 'pk_tipe_penilaian_dokumen');
         });

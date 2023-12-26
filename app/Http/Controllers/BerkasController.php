@@ -10,6 +10,7 @@ use App\Models\KelasPerkuliahan;
 use App\Models\KontrakPerkuliahan;
 use App\Models\DetailHasilVerifikator;
 use App\Models\HasilVerifikasi;
+use App\Models\JenisSoalUjian;
 use App\Models\Monitoring;
 use App\Models\User;
 use Illuminate\Support\Facades\Storage;
@@ -86,30 +87,58 @@ class BerkasController extends Controller
 
     public function penilaian_data(){
         $JenisKelengkapanDokumen = JenisKelengkapanDokumen::get();
-        return response()->json(['data' => $JenisKelengkapanDokumen]);
+        $JenisKelengkapanSoal = JenisSoalUjian::get();
+        return response()->json([
+            'data_dokumen' => $JenisKelengkapanDokumen,
+            'data_soal' => $JenisKelengkapanSoal,
+        ]);
     }
 
     public function penilaian_create(Request $request){
         $data = JenisKelengkapanDokumen::orderBy('id_jenis_kelengkapan_dokumen', 'DESC')->first();
-        $id;
-
-        if($data == null){
-            $id = "P01";
-        }else{
-            $newId = substr($data->id_jenis_kelengkapan_dokumen, 1,2);
-            $tambah = (int)$newId + 1;
-            if (strlen($tambah) == 1){
-                $id = "P0" .$tambah;
-            }else if (strlen($tambah) == 2){
-                $id = "P" .$tambah;
+        $data_soal = JenisSoalUjian::orderBy('id_form_validasisoal', 'DESC')->first();
+        $jenis = $request->jenis_kelengkapan;
+        // dd($test);
+        if($jenis == 1){
+            if($data == null){
+                $id = "P01";
+            }else{
+                $newId = substr($data->id_jenis_kelengkapan_dokumen, 1,2);
+                $tambah = (int)$newId + 1;
+                if (strlen($tambah) == 1){
+                    $id = "P0" .$tambah;
+                }else if (strlen($tambah) == 2){
+                    $id = "P" .$tambah;
+                }
             }
+    
+            JenisKelengkapanDokumen::create([
+                'id_jenis_kelengkapan_dokumen' => $id,
+                'point_penilaian_kelengkapan_dokumen' => $request->kelengkapan_dokumen,
+                'tipe_penilaian' => $request->tipe_penilaian,
+            ]);
+        } elseif($jenis == 2){
+            if($data_soal == null){
+                $id = "S01";
+            }else{
+                $newId = substr($data_soal->id_form_validasisoal, 1,2);
+                $tambah = (int)$newId + 1;
+                if (strlen($tambah) == 1){
+                    $id = "S0" .$tambah;
+                }else if (strlen($tambah) == 2){
+                    $id = "S" .$tambah;
+                }
+            }
+    
+            JenisSoalUjian::create([
+                'id_form_validasisoal' => $id,
+                'kriteria_penilaian' => $request->kelengkapan_dokumen,
+                'point_penilaian' => $request->tipe_penilaian,
+            ]);
         }
+        // $id;
 
-        JenisKelengkapanDokumen::create([
-            'id_jenis_kelengkapan_dokumen' => $id,
-            'point_penilaian_kelengkapan_dokumen' => $request->kelengkapan_dokumen,
-            'tipe_penilaian' => $request->tipe_penilaian,
-        ]);
+        
 
         return redirect()->route('jurusan.kategori_penilaian')->with('success', 'Data Berhasil Di Simpan');
     }

@@ -17,7 +17,7 @@ class CreateMonitoringbapTable extends Migration
             $table->engine = 'InnoDB'; // <- add this
             $table->integer('pertemuan');
             $table->integer('id_kelas_perkuliahan');
-            $table->string('nip_dosen')->length(18)->unique();
+            $table->string('nip_dosen')->length(18);
             $table->integer('jumlah_mahasiswa_hadir');
             $table->dateTime('tanggal');
             $table->string('materi')->length(50);

@@ -27,18 +27,22 @@
                                 </span>
                                 <span class="text"><i class="fa fa-plus"></i> Buat Kontrak Perkuliahan</span>
                             </a> -->
+                            @if(isset($berkas))
                             <a href="#" id="add" class="btn btn-secondary btn-sm">
                                 <!-- <span class="icon text-white-50">
                                     <i class="fa fa-plus"></i>
                                 </span> -->
                                 <span class="text"><i class="fa fa-plus"></i> Upload Berkas Perkuliahan</span>
                             </a>
+                            @endif
+                            @if(isset($berkas_soal))
                             <a href="#" id="add1" class="btn btn-secondary btn-sm">
                                 <!-- <span class="icon text-white-50">
                                     <i class="fa fa-plus"></i>
                                 </span> -->
                                 <span class="text"><i class="fa fa-plus"></i> Upload Soal Ujian</span>
                             </a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -52,20 +56,21 @@
                                     <th>Kategori Berkas</th>
 {{--                                    <th>Tanggal Upload</th>--}}
                                     <th>Status</th>
-{{--                                    <th>Keterangan</th>--}}
-                                    <th>Action</th>
+                                    <th>Keterangan</th>
+                                    <!-- <th>Action</th> -->
                                 </tr>
                             </thead>
                             <tbody style="font-size:13px;">
                             <?php
                             $no = 1;
                             ?>
+                            @if(isset($berkas))
                             @forelse($berkas as $b)
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td>Berkas RPS</td>
                                     <td class="text-center">
-                                        <a id="pdf" href="{{ $b->file_rps }}"><i class="fa fa-file"></i></a>
+                                        <a id="pdf1" href="#" data-id="" data-id1="{{$b->id_kelas_perkuliahan}}" data-id3="1"><i class="fa fa-file"></i></a>
                                     </td>
                                     <td class="text-center">
                                         @if($b->status == 1)
@@ -76,15 +81,16 @@
                                             <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td>{{$b->keterangan}}</td>
+                                    <!-- <td class="text-center">
                                         <a style="text-decoration:none" href="#" data-id="{{$b->id_kelas_perkuliahan}}" data-nama="{{$b->id_kelas_perkuliahan}}" data-id1="{{$b->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td>Berkas RTM</td>
                                     <td class="text-center">
-                                        <a id="pdf" href="{{ $b->file_rtm }}"><i class="fa fa-file"></i></a>
+                                        <a id="pdf1" href="#" data-id="" data-id1="{{$b->id_kelas_perkuliahan}}" data-id3="2"><i class="fa fa-file"></i></a>
                                     </td>
                                     <td class="text-center">
                                         @if($b->status == 1)
@@ -95,16 +101,16 @@
                                             <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td>{{$b->keterangan}}</td>
+                                    <!-- <td class="text-center">
                                         <a style="text-decoration:none" href="#" data-id="{{$b->id_kelas_perkuliahan}}" data-nama="{{$b->id_kelas_perkuliahan}}" data-id1="{{$b->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                                 <tr>
                                     <td>{{$no++}}</td>
                                     <td>Berkas Kontrak Perkuliahan</td>
                                     <td class="text-center">
-                                        {{--                                        <a id="pdf" href="{{ $b->file_kontrak_perkuliahan }}"><i class="fa fa-file"></i></a>--}}
-                                        <a href="{{ asset('storage/'.$b->file_kontrak_perkuliahan) }}"><i class="fa fa-file"></i></a>
+                                        <a id="pdf1" href="#" data-id="" data-id1="{{$b->id_kelas_perkuliahan}}" data-id3="3"><i class="fa fa-file"></i></a>
                                     </td>
                                     <td class="text-center">
                                         @if($b->status == 1)
@@ -115,23 +121,25 @@
                                             <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td>{{$b->keterangan}}</td>
+                                    <!-- <td class="text-center">
                                         <a style="text-decoration:none" href="#" data-id="{{$b->id_kelas_perkuliahan}}" data-nama="{{$b->id_kelas_perkuliahan}}" data-id1="{{$b->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             @empty
                                 <tr class="text-center">
                                     <td colspan="6">Tidak Ada Ada</td>
                                 </tr>
                             @endforelse
-
+                            @endif
+                            @if(isset($berkas_soal))
                             @forelse($berkas_soal as $bs)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td>Berkas Soal</td>
+                                    <td>Berkas Soal {{$bs->nama_soal}}</td>
                                     {{--                                        <td>{{$b->tanggal_upload}}</td>--}}
                                     <td class="text-center">
-                                        <a id="pdf" href="#" data-id="{{$b->id_kategori_berkas}}" data-id1="{{$b->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
+                                        <a id="pdf" href="#" data-id="{{$bs->id_soal }}" data-id1="{{$bs->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
                                     </td>
                                     <td class="text-center">
                                         @if($bs->status == 1)
@@ -142,15 +150,17 @@
                                             <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td>{{$bs->keterangan}}</td>
+                                    <!-- <td class="text-center">
                                         <a style="text-decoration:none" href="#" data-id="{{$bs->id_kelas_perkuliahan}}" data-nama="{{$bs->id_kelas_perkuliahan}}" data-id1="{{$bs->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             @empty
                                 <tr class="text-center">
                                     <td colspan="6">Tidak Ada Ada</td>
                                 </tr>
                             @endforelse
+                            @endif
                             </tbody>
                         </table>
                     </div>
@@ -239,7 +249,7 @@
             </div>
         </div>
     </div>
-
+    
     <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
@@ -340,6 +350,17 @@ $(document).ready( function () {
                 location.reload();
             },
         });
+    });
+
+    $(document).on('click', '#pdf', function() {
+    var id = $(this).data('id');
+    var id1 = $(this).data('id1');
+    window.open("{{ url('berkas') }}/"+id+'/'+id1);
+    });
+    $(document).on('click', '#pdf1', function() {
+        var id1 = $(this).data('id1');
+        var id3 = $(this).data('id3');
+        window.open("{{ url('berkas-dokumen') }}/"+id1+'/'+id3);
     });
 });
 </script>

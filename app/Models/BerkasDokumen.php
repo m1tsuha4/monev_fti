@@ -18,7 +18,7 @@ class BerkasDokumen extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id_soal', 'id_kelas_perkuliahan', 'nama_soal', 'file_soal','status'
+        'id_soal', 'id_kelas_perkuliahan', 'nama_soal', 'file_soal','status','keterangan'
     ];
 
 //    public function kelas_perkuliahan(){

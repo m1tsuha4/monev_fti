@@ -80,6 +80,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Pertemuan</th>
                                     <th>Tanggal</th>
                                     <th>Materi</th>
                                     <th>Jumlah Mahasiswa</th>
@@ -95,6 +96,7 @@
 
                                         <tr>
                                             <td>{{$no++}}</td>
+                                            <td>{{$b->pertemuan}}</td>
                                             <td>{{$b->tanggal}}</td>
                                             <td>{{$b->materi}}</td>
                                             <td>{{$b->jumlah_mahasiswa_hadir}} Orang</td>

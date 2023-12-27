@@ -17,7 +17,7 @@ class CreateKelasPerkuliahansTable extends Migration
             $table->engine = 'InnoDB'; // <- add this
             $table->integer('id_kelas_perkuliahan');
             $table->string('kode_matakuliah')->length(10);
-            $table->integer('id_tahun_akademik');
+            $table->foreignId('id_tahun_akademik');
             $table->string('kelas');
             $table->string('keterangan')->length(50)->nullable();
             $table->string('file_rps')->nullable();

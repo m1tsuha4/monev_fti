@@ -63,10 +63,10 @@
                         <div>
                             <b>Berkas Kelengkapan Dokumen Perkuliahan Dan Validasi Soal Ujian</b><br><br>
                             @foreach($data as $d)
-                                @if($d->status == 2)
+                                @if($d->status_kelas_perkuliahan == 2)
                                     @if($d->timeline_perkuliahan == 1)
 {{--                                        <button class="btn btn-sm btn-info" id="berkas" data-id="{{$d->id_hasilverifikasi}}"><i class="fa fa-file"></i> Kelengkapan Dokumen Perkuliahan</button>--}}
-                                        <button class="btn btn-sm btn-info" id="berkas" data-id=""><i class="fa fa-file"></i> Kelengkapan Dokumen Perkuliahan</button>
+                                        <button class="btn btn-sm btn-info" id="berkas" data-id="{{$d->id_kelas_perkuliahan}}"><i class="fa fa-file"></i> Kelengkapan Dokumen Perkuliahan</button>
                                     @elseif($d->timeline_perkuliahan == 2)
                                         <button class="btn btn-sm btn-info" id="uts" data-id=""><i class="fa fa-file"></i> Soal Ujian Tengah Semester</button>
                                     @elseif($d->timeline_perkuliahan == 3)

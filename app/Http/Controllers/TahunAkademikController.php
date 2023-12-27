@@ -18,16 +18,16 @@ class TahunAkademikController extends Controller
 
     public function create(Request $request){
         $data = TahunAkademik::orderBy('id_tahun_akademik', 'DESC')->first();
-        $id;
+        // $id;
 
-        if($data == null){
-            $id = 1;
-        }else{
-            $id = $data->id_tahun_akademik + 1;
-        }
+        // if($data == null){
+        //     $id = 1;
+        // }else{
+        //     $id = $data->id_tahun_akademik + 1;
+        // }
         
         TahunAkademik::create([
-            'id_tahun_akademik' => $id,
+            // 'id_tahun_akademik' => $id,
             'tahun' => $request->tahun,
             'semester' => $request->semester,
             'status' => $request->status,

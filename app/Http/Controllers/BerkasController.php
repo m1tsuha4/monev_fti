@@ -86,12 +86,14 @@ class BerkasController extends Controller
     }
 
     public function penilaian_data(){
+        // $JenisKelengkapanDokumen = JenisKelengkapanDokumen::get();
+        // // $JenisKelengkapanSoal = JenisSoalUjian::get();
+        // return response()->json([
+        //     'data_dokumen' => $JenisKelengkapanDokumen,
+        //     // 'data_soal' => $JenisKelengkapanSoal,
+        // ]);
         $JenisKelengkapanDokumen = JenisKelengkapanDokumen::get();
-        $JenisKelengkapanSoal = JenisSoalUjian::get();
-        return response()->json([
-            'data_dokumen' => $JenisKelengkapanDokumen,
-            'data_soal' => $JenisKelengkapanSoal,
-        ]);
+        return response()->json(['data' => $JenisKelengkapanDokumen]);
     }
 
     public function penilaian_create(Request $request){
@@ -438,22 +440,45 @@ class BerkasController extends Controller
     }
 
     public function kelengkapan_dokumen($id){
-        $data = DB::table('hasilverifikasi')->where('hasilverifikasi.id_hasilverifikasi','=',$id)
-        ->join('kelasperkuliahan','kelasperkuliahan.id_kelasperkuliahan','=','hasilverifikasi.id_kelasperkuliahan')
-        ->join('matakuliah','matakuliah.kode_matakuliah','=','kelasperkuliahan.kode_matakuliah')
-        ->join('tahun_akademik','tahun_akademik.id_tahun_akademik','=','kelasperkuliahan.id_tahun_akademik')
-        ->join('dosen','dosen.nip_dosen','=','kelasperkuliahan.nip_dosen')->get();
+        $data = DB::table('kelas_perkuliahans')
+            ->select(
+                'kelas_perkuliahans.*',
+                'matakuliahs.*',
+                'tahun_akademik.*',
+                'dosen_kelas.*',
+                'dosen_pengampu.nama_dosen AS nama_pengampu',
+                'kelas_perkuliahans.dosen_verifikator AS nip_verifikator',
+                'dosen_verifikator.nama_dosen AS nama_verifikator',
+                'kurikulums.*',
+                'kelas_perkuliahans.status AS status_kelas_perkuliahan'
+            )
+            ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
+            ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
+            ->join('dosen_kelas', 'dosen_kelas.id_kelas_perkuliahan', '=', 'kelas_perkuliahans.id_kelas_perkuliahan')
+            ->join('dosen as dosen_pengampu', 'dosen_pengampu.nip_dosen', '=', 'dosen_kelas.nip_dosen')
+            ->join('dosen as dosen_verifikator', 'dosen_verifikator.nip_dosen', '=', 'kelas_perkuliahans.dosen_verifikator')
+            ->join('kurikulums', 'matakuliahs.tahun_kurikulum', '=', 'kurikulums.id')
+            ->where('kelas_perkuliahans.id_kelas_perkuliahan', '=', $id)
+            ->get();
 
-        $data1 = DetailHasilVerifikator::where('id_hasilverifikasi', $id)->with('jenis_kelengkapan_berkas','hasil_verifikasi.dosen_verifikator')->get();
+        // $data = DB::table('hasilverifikasi')->where('hasilverifikasi.id_hasilverifikasi','=',$id)
+        // ->join('kelasperkuliahan','kelasperkuliahan.id_kelasperkuliahan','=','hasilverifikasi.id_kelasperkuliahan')
+        // ->join('matakuliah','matakuliah.kode_matakuliah','=','kelasperkuliahan.kode_matakuliah')
+        // ->join('tahun_akademik','tahun_akademik.id_tahun_akademik','=','kelasperkuliahan.id_tahun_akademik')
+        // ->join('dosen','dosen.nip_dosen','=','kelasperkuliahan.nip_dosen')->get();
+
+        $data1 = DB::table('tipe_penilaian_dokumen')
+            ->join('form_kelengkapan_dokumen','form_kelengkapan_dokumen.id_jenis_kelengkapan_dokumen','=','tipe_penilaian_dokumen.id_jenis_kelengkapan_dokumen')
+            ->where('id_kelas_perkuliahan', $id)->get();
 
         $gkm = User::where('status',2)->first();
 
-        $ttd = HasilVerifikasi::where('id_hasilverifikasi',$id)->first();
+        // $ttd = HasilVerifikasi::where('id_hasilverifikasi',$id)->first();
 
-        $berkas = BerkasDokumen::where('id_kelasperkuliahan',$ttd->id_kelasperkuliahan)->get();
+        // $berkas = BerkasDokumen::where('id_kelasperkuliahan',$ttd->id_kelasperkuliahan)->get();
 
         // echo $data;
-        $pdf = PDF::loadView('Berkas.kelengkapan_berkas', compact('data','data1','gkm','ttd','berkas'))->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('Berkas.kelengkapan_berkas', compact('data','data1','gkm'))->setPaper('a4', 'potrait');
 
         // echo $berkas;
         return $pdf->stream();
@@ -461,6 +486,7 @@ class BerkasController extends Controller
     }
 
     public function soal_uts($id){
+        
         $data = DB::table('hasilverifikasi')->where('hasilverifikasi.id_hasilverifikasi','=',$id)
         ->join('kelasperkuliahan','kelasperkuliahan.id_kelasperkuliahan','=','hasilverifikasi.id_kelasperkuliahan')
         ->join('tahun_akademik','kelasperkuliahan.id_tahun_akademik','=','tahun_akademik.id_tahun_akademik')
@@ -485,21 +511,43 @@ class BerkasController extends Controller
     }
 
     public function bap($id, $status){
-        $data = DB::table('hasilverifikasi')->where([['hasilverifikasi.id_hasilverifikasi','=',$id],['hasilverifikasi.timeline_perkuliahan',$status]])
-        ->join('kelasperkuliahan','kelasperkuliahan.id_kelasperkuliahan','=','hasilverifikasi.id_kelasperkuliahan')
-        ->join('matakuliah','matakuliah.kode_matakuliah','=','kelasperkuliahan.kode_matakuliah')
-        ->join('tahun_akademik','kelasperkuliahan.id_tahun_akademik','=','kelasperkuliahan.id_tahun_akademik')
-        ->join('dosen','dosen.nip_dosen','=','kelasperkuliahan.nip_dosen')->get();
+        $data = DB::table('kelas_perkuliahans')
+            ->select(
+                'kelas_perkuliahans.*',
+                'matakuliahs.*',
+                'tahun_akademik.*',
+                'dosen_kelas.*',
+                'dosen_pengampu.nama_dosen AS nama_pengampu',
+                'kelas_perkuliahans.dosen_verifikator AS nip_verifikator',
+                'dosen_verifikator.nama_dosen AS nama_verifikator',
+                'kurikulums.*',
+                'kelas_perkuliahans.status AS status_kelas_perkuliahan'
+            )
+            ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
+            ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
+            ->join('dosen_kelas', 'dosen_kelas.id_kelas_perkuliahan', '=', 'kelas_perkuliahans.id_kelas_perkuliahan')
+            ->join('dosen as dosen_pengampu', 'dosen_pengampu.nip_dosen', '=', 'dosen_kelas.nip_dosen')
+            ->join('dosen as dosen_verifikator', 'dosen_verifikator.nip_dosen', '=', 'kelas_perkuliahans.dosen_verifikator')
+            ->join('kurikulums', 'matakuliahs.tahun_kurikulum', '=', 'kurikulums.id')
+            ->where('kelas_perkuliahans.id_kelas_perkuliahan', '=', $id)
+            ->where('timeline_perkuliahan','=',$status)
+            ->get();
 
-        $data1 = Monitoring::where('id_hasilverifikasi', $id)->get();
+        // $data = DB::table('hasilverifikasi')->where([['hasilverifikasi.id_hasilverifikasi','=',$id],['hasilverifikasi.timeline_perkuliahan',$status]])
+        // ->join('kelasperkuliahan','kelasperkuliahan.id_kelasperkuliahan','=','hasilverifikasi.id_kelasperkuliahan')
+        // ->join('matakuliah','matakuliah.kode_matakuliah','=','kelasperkuliahan.kode_matakuliah')
+        // ->join('tahun_akademik','kelasperkuliahan.id_tahun_akademik','=','kelasperkuliahan.id_tahun_akademik')
+        // ->join('dosen','dosen.nip_dosen','=','kelasperkuliahan.nip_dosen')->get();
+
+        $data1 = Monitoring::where('id_kelas_perkuliahan', $id)->get();
 
         $gkm = User::where('status',2)->first();
 
-        $ttd = HasilVerifikasi::where('id_hasilverifikasi',$id)->first();
+        // $ttd = HasilVerifikasi::where('id_hasilverifikasi',$id)->first();
 
         // $berkas = BerkasDokumen::where('id_kelas_perkuliahan',$ttd->id_kelas_perkuliahan)->get();
 
-        $pdf = PDF::loadView('Berkas.cetak_bap', compact('data','data1','gkm','ttd'))->setPaper('a4', 'potrait');
+        $pdf = PDF::loadView('Berkas.cetak_bap', compact('data','data1','gkm'))->setPaper('a4', 'potrait');
 
         return $pdf->stream();
         // return view('Berkas.kelengkapan_berkas', compact('data','data1','gkm','ttd'));

@@ -46,7 +46,7 @@
         </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Dosen Pengampu</b></td>
-            <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama}}</b></td>
+            <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama_pengampu}}</b></td>
         </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Tahun Akademik</b></td>
@@ -114,10 +114,10 @@
                 <span>Tanggal:</span><br>
                 <span>Dosen Verifikator:</span>
                 <div>
-                    <img src="{{ public_path($data1[0]->hasil_verifikasi->ttd_url) }}" width="100px">
+                   
                 </div>
-                <span>( {{$data1[0]->hasil_verifikasi->dosen_verifikator->nama}} )</span><br>
-                <span>Nip. {{$data1[0]->hasil_verifikasi->dosen_verifikator->nip}}</span>
+                <span>( {{$data[0]->nama_verifikator}} )</span><br>
+                <span>Nip. {{$data[0]->nip_verifikator}}</span>
             </td>
             <td style="width:30%;border-style: solid;text-align: center;" colspan=2>
                 @if($data[0]->catatan == null || $data[0]->catatan = "")
@@ -130,7 +130,7 @@
                 <span>Mengetahui</span><br>
                 <span>Ketua GKM</span>
                 <div>
-                     <img src="{{ public_path($data1[0]->hasil_verifikasi->ttd_url1) }}" width="100px">
+                    
                 </div>
                 <span>( {{$gkm->nama}} )</span><br>
                 <span>Nip. {{$gkm->nip}}</span>

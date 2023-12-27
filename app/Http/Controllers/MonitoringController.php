@@ -70,6 +70,15 @@ class MonitoringController extends Controller
                         'assesment' => $request->assesment,
                         'bukti' => $path,
                     ]);
+                    $countMonitoring = Monitoring::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->count();
+
+                    if ($countMonitoring >= 8 && $countMonitoring < 16) {
+                        // Update the kelas_perkuliahan table with timeline = 2
+                        KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 2]);
+                    } elseif ($countMonitoring >= 16) {
+                        // Update the kelas_perkuliahan table with timeline = 3
+                        KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 3]);
+                    }
 
                     return redirect()->route('dosen.kelas-perkuliahan')->with('success', 'Data Berhasil Di Simpan');
                 }
@@ -284,7 +293,8 @@ class MonitoringController extends Controller
                 'dosen_pengampu.nama_dosen AS nama_pengampu',
                 'kelas_perkuliahans.dosen_verifikator AS nip_verifikator',
                 'dosen_verifikator.nama_dosen AS nama_verifikator',
-                'kurikulums.*'
+                'kurikulums.*',
+                'kelas_perkuliahans.status AS status_kelas_perkuliahan'
             )
             ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
             ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
@@ -294,7 +304,7 @@ class MonitoringController extends Controller
             ->join('kurikulums', 'matakuliahs.tahun_kurikulum', '=', 'kurikulums.id')
             ->where('kelas_perkuliahans.id_kelas_perkuliahan', '=', $id)
             ->get();
-//        dd($data);
+    //    dd($data);
 
 //        $data1 = HasilVerifikasi::where('id_kelasperkuliahan',$id)->with('dosen_verifikator')->get();
 //
@@ -328,7 +338,8 @@ class MonitoringController extends Controller
                 'dosen_pengampu.nama_dosen AS nama_pengampu',
                 'kelas_perkuliahans.dosen_verifikator AS nip_verifikator',
                 'dosen_verifikator.nama_dosen AS nama_verifikator',
-                'kurikulums.*'
+                'kurikulums.*',
+                'kelas_perkuliahans.status AS status_kelas_perkuliahan'
             )
             ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
             ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
@@ -338,7 +349,7 @@ class MonitoringController extends Controller
             ->join('kurikulums', 'matakuliahs.tahun_kurikulum', '=', 'kurikulums.id')
             ->where('kelas_perkuliahans.id_kelas_perkuliahan', '=', $id)
             ->get();
-
+            // dd($data);
 //        $data1 = HasilVerifikasi::where('id_kelasperkuliahan',$id)->with('dosen_verifikator')->get();
 
         return view('Ketua_jurusan.laporan_penilaian.detail', compact('data'));

@@ -15,9 +15,9 @@ class CreateTahunAkademikTable extends Migration
     {
         Schema::create('tahun_akademik', function (Blueprint $table) {
             $table->engine = 'InnoDB'; // <- add this
-            $table->integer('id_tahun_akademik')->primary();
+            $table->id('id_tahun_akademik');
             $table->integer('tahun');
-            $table->string('semester')->length(1)->unique();
+            $table->string('semester')->length(1);
             $table->integer('status');
             $table->timestamps();
         });

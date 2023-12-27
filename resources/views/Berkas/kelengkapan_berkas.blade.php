@@ -37,7 +37,7 @@
         </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Dosen Pengampu</b></td>
-            <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama}}</b></td>
+            <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama_pengampu}}</b></td>
         </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Tahun Akademik</b></td>
@@ -55,32 +55,56 @@
             <th style="border-style: solid;" colspan="2">Keterangan</th>
         </tr>
         <?php $no=1 ?>
-        @foreach($berkas as $b)
-            @if($b->kategori_berkas->kategori_berkas == 1)
-            <tr style="font-size:12px;text-align: center;">
-                <td style="border-style: solid;">{{$no++}}</td>
-                <td style="border-style: solid;text-align: left;" colspan="2">
-                    @if($b->kategori_berkas->nama_berkas == "RPS")
+        <tr style="font-size:12px;text-align: center;">
+            <td style="border-style: solid;">{{$no++}}</td>
+            <td style="border-style: solid;text-align: left;" colspan="2">
+                @if($data[0]->file_rps)
                     Rencana Pembelajaran Semester (RPS)
-                    @elseif($b->kategori_berkas->nama_berkas == "BAP")
-                    Berita Acara Perkuliahan (BAP)
-                    @elseif($b->kategori_berkas->nama_berkas =="RTM")
-                    Rencana Tugas Mahasiswa beserta rubrik penilaian
-                    @else
-                    {{$b->kategori_berkas->nama_berkas}}
-                    @endif
-                </td>
-                <td style="border-style: solid;">
-                    @if($b->status == 2)
+                @endif
+            </td>
+            <td style="border-style: solid;">
+                @if($data[0]->status_kelas_perkuliahan == 2)
                     Ada
-                    @else
+                @else
                     Tidak Ada
-                    @endif
-                </td>
-                <td style="border-style: solid;" colspan="2">{{$b->keterangan}}</td>
-            </tr>
-            @endif
-        @endforeach
+                @endif
+            </td>
+            <td style="border-style: solid;" colspan="2">{{$data[0]->keterangan}}</td>
+        </tr>
+        <tr style="font-size:12px;text-align: center;">
+            <td style="border-style: solid;">{{$no++}}</td>
+            <td style="border-style: solid;text-align: left;" colspan="2">
+                @if($data[0]->file_kontrak_perkuliahan)
+                    Berita Acara Perkuliahan (BAP)
+                @endif
+            </td>
+            <td style="border-style: solid;">
+                @if($data[0]->status_kelas_perkuliahan == 2)
+                    Ada
+                @else
+                    Tidak Ada
+                @endif
+            </td>
+            <td style="border-style: solid;" colspan="2">{{$data[0]->keterangan}}</td>
+        </tr>
+        <tr style="font-size:12px;text-align: center;">
+            <td style="border-style: solid;">{{$no++}}</td>
+            <td style="border-style: solid;text-align: left;" colspan="2">
+                @if($data[0]->file_rtm)
+                    Rencana Tugas Mahasiswa beserta rubrik penilaian
+                @endif
+            </td>
+            <td style="border-style: solid;">
+                @if($data[0]->status_kelas_perkuliahan == 2)
+                    Ada
+                @else
+                    Tidak Ada
+                @endif
+            </td>
+            <td style="border-style: solid;" colspan="2">{{$data[0]->keterangan}}</td>
+        </tr>
+
+
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;" colspan=6>
                 <b>KELENGKAPAN DOKUMEN RPS</b>
@@ -97,7 +121,7 @@
         @foreach($data1 as $d)
         <tr style="font-size:12px;text-align: center;">
             <td style="border-style: solid;">{{$no++}}</td>
-            <td style="border-style: solid;text-align: left;" colspan="2">{{$d->jenis_kelengkapan_berkas->kelengkapan_dokumen}}</td>
+            <td style="border-style: solid;text-align: left;" colspan="2">{{$d->point_penilaian_kelengkapan_dokumen}}</td>
             <td style="border-style: solid;">{{$d->penilaian}}</td>
             <td style="border-style: solid;" colspan="2">{{$d->keterangan}}</td>
         </tr>
@@ -121,16 +145,16 @@
                 <span>Tanggal:</span><br>
                 <span>Dosen Verifikator:</span>
                 <div>
-                    <img src="{{ public_path($data1[0]->hasil_verifikasi->ttd_url) }}" width="100px">
+                   
                 </div>
-                <span>( {{$data1[0]->hasil_verifikasi->dosen_verifikator->nama}} )</span><br>
-                <span>Nip. {{$data1[0]->hasil_verifikasi->dosen_verifikator->nip}}</span>
+                <span>( {{$data[0]->nama_verifikator}} )</span><br>
+                <span>Nip. {{$data[0]->nip_verifikator}}</span>
             </td>
             <td style="border-style: solid;text-align: right;padding-right:5px" colspan=3>
                 <span>Mengetahui</span><br>
                 <span>Ketua GKM</span>
                 <div>
-                     <img src="{{ public_path($data1[0]->hasil_verifikasi->ttd_url1) }}" width="100px">
+                    
                 </div>
                 <span>( {{$gkm->nama}} )</span><br>
                 <span>Nip. {{$gkm->nip}}</span>

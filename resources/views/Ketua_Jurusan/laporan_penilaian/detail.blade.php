@@ -64,13 +64,19 @@
                             <b>Berkas Kelengkapan Dokumen Perkuliahan Dan Validasi Soal Ujian</b><br><br>
                             @foreach($data as $d)
                                 @if($d->status_kelas_perkuliahan == 2)
-                                    @if($d->timeline_perkuliahan == 1)
-{{--                                        <button class="btn btn-sm btn-info" id="berkas" data-id="{{$d->id_hasilverifikasi}}"><i class="fa fa-file"></i> Kelengkapan Dokumen Perkuliahan</button>--}}
+                                    <!-- @if($d->timeline_perkuliahan == 1)
                                         <button class="btn btn-sm btn-info" id="berkas" data-id="{{$d->id_kelas_perkuliahan}}"><i class="fa fa-file"></i> Kelengkapan Dokumen Perkuliahan</button>
                                     @elseif($d->timeline_perkuliahan == 2)
                                         <button class="btn btn-sm btn-info" id="uts" data-id=""><i class="fa fa-file"></i> Soal Ujian Tengah Semester</button>
                                     @elseif($d->timeline_perkuliahan == 3)
                                         <button class="btn btn-sm btn-info" id="uas" data-id=}"><i class="fa fa-file"></i> Soal Ujian Akhir Semester</button>
+                                    @endif -->
+                                    <button class="btn btn-sm btn-info" id="berkas" data-id="{{$d->id_kelas_perkuliahan}}"><i class="fa fa-file"></i> Kelengkapan Dokumen Perkuliahan</button>
+                                    @if(isset($data_uts))
+                                    <button class="btn btn-sm btn-info" id="uts" data-id="{{$d->id_kelas_perkuliahan}}"><i class="fa fa-file"></i> Soal Ujian Tengah Semester</button>
+                                    @endif
+                                    @if(isset($data_uas))
+                                    <button class="btn btn-sm btn-info" id="uas" data-id="{{$d->id_kelas_perkuliahan}}"><i class="fa fa-file"></i> Soal Ujian Akhir Semester</button>
                                     @endif
                                 @endif
                             @endforeach

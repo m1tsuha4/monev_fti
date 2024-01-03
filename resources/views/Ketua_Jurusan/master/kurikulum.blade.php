@@ -9,7 +9,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Kategori Penilaian Dokumen Page</h1>
+        <h1 class="h3 mb-0 text-gray-800">Kurikulum Page</h1>
     </div>
 
     <div class="row">
@@ -36,8 +36,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kelengkapan Dokumen</th>
-                                    <th>Tipe Penilaian Dokumen</th>
+                                    <th>Tahun Kurikulum</th>
+                                    <th>Kode Prodi</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,7 +60,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Form Kategori Penilaian Dokumen</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Form Kurikulum</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -69,13 +70,18 @@
                     {{ csrf_field() }}
 
                     <div class="form-group" id="div_nama">
-                        {{Form::label('text', 'Kelengkapan Dokumen :', ['class' => 'awesome'])}}
-                        {{Form::text('kelengkapan_dokumen','',['class' => 'form-control', 'id' => 'kelengkapan_dokumen', 'placeholder' => 'Nama Kelengkapan Dokumen ...'])}}
+                        {{Form::label('text', 'Tahun Kurikulum :', ['class' => 'awesome'])}}
+                        {{Form::text('tahun_kurikulum','',['class' => 'form-control', 'id' => 'tahun_kurikulum', 'placeholder' => '...'])}}
                     </div>
 
                     <div class="form-group" id="div_nama">
-                        {{Form::label('text', 'Tipe Penilaian :', ['class' => 'awesome'])}}
-                        {{Form::text('tipe_penilaian','',['class' => 'form-control', 'id' => 'tipe_penilaian', 'placeholder' => 'Jenis Berkas Penilaian ...'])}}
+                        {{Form::label('text', 'Kode Prodi :', ['class' => 'awesome'])}}
+                        {{Form::text('kode_prodi','',['class' => 'form-control', 'id' => 'kode_prodi', 'placeholder' => '...'])}}
+                    </div>
+
+                    <div class="form-group" id="div_nama">
+                        {{Form::label('text', 'Status :', ['class' => 'awesome'])}}
+                        {{Form::select('status',['1' => 'Active','2' => 'Non-Active'],null,['class' => 'form-control', 'id' => 'status'])}}
                     </div>
 
                 </div>
@@ -93,23 +99,33 @@
 <script>
 $(document).ready( function () {
         var table = $('#table').DataTable( {
-            "pageLength": 50,
             language: {
                 "emptyTable": "Tidak Ada Data Tersimpan"
             },
-            ajax: "{{ url('/jurusan/kategori-penilaian-dokumen/data') }}",
+            ajax: "{{ url('/jurusan/kurikulum/data') }}",
                 "columns": [
                     {
-                        "data": "id_jenis_kelengkapan_dokumen",
+                        "data": "id",
                         class: "text-center",
                         render: function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { "data": "point_penilaian_kelengkapan_dokumen"},
-                    { "data": "tipe_penilaian"},
+                    { "data": "tahun_kurikulum"},
+                    { "data": "kode_prodi"},
+                    { 
+                        data : "status",
+                        sClass : 'text-center',
+                        render : function(data){
+                            if(data == 1){
+                                return '<span class="badge badge-success">Active</span>';
+                            }else{
+                                return '<span class="badge badge-danger">Non - Active</span>';
+                            }
+                        },
+                    },
                     {
-                        data: 'id_jenis_kelengkapan_dokumen',
+                        data: 'id',
                         sClass: 'text-center',
                         render: function(data) {
                             return '<a style="text-decoration:none" href="#" data-id="'+data+'" id="edit" class="text-secondary" title="edit"><i class="fas fa-edit"></i></a> &nbsp;'+
@@ -124,30 +140,30 @@ $(document).ready( function () {
     }, 5000 );
 
     $(document).on('click', '#add', function() {
-        $('#modal').modal('show');
-        $('#kelengkapan_dokumen').val("");
-        $('#tipe_penilaian').val("");
-        $('#form').attr('action', '{{ url('jurusan/kategori-penilaian-dokumen/create') }}');
+        $('#modal').modal('show');  
+        $('#tahun_kurikulum').val("");
+        $('#kode_prodi').val("");
+        $('#form').attr('action', '{{ url('jurusan/kurikulum/create') }}');     
     });
 
     $(document).on('click', '#edit', function() {
         $('#modal').modal('show');
         var id = $(this).data('id');
-        $.ajax({
+        $.ajax({   
             type: "get",
-            url: "{{ url('/jurusan/kategori-penilaian-dokumen/edit') }}/"+id,
+            url: "{{ url('/jurusan/kurikulum/edit') }}/"+id,
             dataType: "json",
             success: function(data) {
                 console.log(data[0].id);
                 event.preventDefault();
-                var kelengkapan_dokumen=data[0].point_penilaian_kelengkapan_dokumen
-                var tipe_penilaian=data[0].tipe_penilaian
+                var tahun_kurikulum=data[0].tahun_kurikulum
+                var kode_prodi=data[0].kode_prodi
 
-                $('#kelengkapan_dokumen').val(kelengkapan_dokumen).change();
-                $('#tipe_penilaian').val(tipe_penilaian).change();
-                $('#form').attr('action', '{{ url('jurusan/kategori-penilaian-dokumen/update') }}/'+id);
+                $('#tahun_kurikulum').val(tahun_kurikulum).change();
+                $('#kode_prodi').val(kode_prodi).change();
+                $('#form').attr('action', '{{ url('jurusan/kurikulum/update') }}/'+id);
             }
-        });
+        });        
     });
 
     $('#simpan').submit(function(e) {
@@ -171,7 +187,7 @@ $(document).ready( function () {
             var id = $(this).data('id');
             if (confirm("Anda Yakin ingin menghapus data?")){
                 $.ajax({
-                    url : "{{ url('jurusan/kategori-penilaian-dokumen/delete') }}/"+id,
+                    url : "{{ url('jurusan/kurikulum/delete') }}/"+id,
                     success :function () {
                         location.reload();
                     }

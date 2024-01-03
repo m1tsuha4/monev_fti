@@ -9,7 +9,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Kategori Penilaian Dokumen Page</h1>
+        <h1 class="h3 mb-0 text-gray-800">Kategori Penilaian Page</h1>
     </div>
 
     <div class="row">
@@ -36,8 +36,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Kelengkapan Dokumen</th>
-                                    <th>Tipe Penilaian Dokumen</th>
+                                    <th>Point Penilaian</th>
+                                    <th>Kriteria Penilaian Soal</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -59,7 +59,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Form Kategori Penilaian Dokumen</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Form Kategori Penilaian Soal</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
@@ -69,13 +69,13 @@
                     {{ csrf_field() }}
 
                     <div class="form-group" id="div_nama">
-                        {{Form::label('text', 'Kelengkapan Dokumen :', ['class' => 'awesome'])}}
-                        {{Form::text('kelengkapan_dokumen','',['class' => 'form-control', 'id' => 'kelengkapan_dokumen', 'placeholder' => 'Nama Kelengkapan Dokumen ...'])}}
+                        {{Form::label('text', 'Point Penilaian :', ['class' => 'awesome'])}}
+                        {{Form::text('point_penilaian','',['class' => 'form-control', 'id' => 'point_penilaian', 'placeholder' => 'Point Penilaian ...'])}}
                     </div>
 
                     <div class="form-group" id="div_nama">
-                        {{Form::label('text', 'Tipe Penilaian :', ['class' => 'awesome'])}}
-                        {{Form::text('tipe_penilaian','',['class' => 'form-control', 'id' => 'tipe_penilaian', 'placeholder' => 'Jenis Berkas Penilaian ...'])}}
+                        {{Form::label('text', 'Kriteria Penilaian :', ['class' => 'awesome'])}}
+                        {{Form::text('kriteria_penilaian','',['class' => 'form-control', 'id' => 'kriteria_penilaian', 'placeholder' => 'Kriteria Penilaian ...'])}}
                     </div>
 
                 </div>
@@ -97,19 +97,19 @@ $(document).ready( function () {
             language: {
                 "emptyTable": "Tidak Ada Data Tersimpan"
             },
-            ajax: "{{ url('/jurusan/kategori-penilaian-dokumen/data') }}",
+            ajax: "{{ url('/jurusan/kategori-penilaian-soal/data') }}",
                 "columns": [
                     {
-                        "data": "id_jenis_kelengkapan_dokumen",
+                        "data": "id_form_validasisoal",
                         class: "text-center",
                         render: function (data, type, row, meta) {
                             return meta.row + meta.settings._iDisplayStart + 1;
                         }
                     },
-                    { "data": "point_penilaian_kelengkapan_dokumen"},
-                    { "data": "tipe_penilaian"},
+                    { "data": "point_penilaian"},
+                    { "data": "kriteria_penilaian"},
                     {
-                        data: 'id_jenis_kelengkapan_dokumen',
+                        data: 'id_form_validasisoal',
                         sClass: 'text-center',
                         render: function(data) {
                             return '<a style="text-decoration:none" href="#" data-id="'+data+'" id="edit" class="text-secondary" title="edit"><i class="fas fa-edit"></i></a> &nbsp;'+
@@ -125,9 +125,9 @@ $(document).ready( function () {
 
     $(document).on('click', '#add', function() {
         $('#modal').modal('show');
-        $('#kelengkapan_dokumen').val("");
-        $('#tipe_penilaian').val("");
-        $('#form').attr('action', '{{ url('jurusan/kategori-penilaian-dokumen/create') }}');
+        $('#point_penilaian').val("");
+        $('#kriteria_penilaian').val("");
+        $('#form').attr('action', '{{ url('jurusan/kategori-penilaian-soal/create') }}');
     });
 
     $(document).on('click', '#edit', function() {
@@ -135,17 +135,17 @@ $(document).ready( function () {
         var id = $(this).data('id');
         $.ajax({
             type: "get",
-            url: "{{ url('/jurusan/kategori-penilaian-dokumen/edit') }}/"+id,
+            url: "{{ url('/jurusan/kategori-penilaian-soal/edit') }}/"+id,
             dataType: "json",
             success: function(data) {
                 console.log(data[0].id);
                 event.preventDefault();
-                var kelengkapan_dokumen=data[0].point_penilaian_kelengkapan_dokumen
-                var tipe_penilaian=data[0].tipe_penilaian
+                var point_penilaian=data[0].point_penilaian
+                var kriteria_penilaian=data[0].kriteria_penilaian
 
-                $('#kelengkapan_dokumen').val(kelengkapan_dokumen).change();
-                $('#tipe_penilaian').val(tipe_penilaian).change();
-                $('#form').attr('action', '{{ url('jurusan/kategori-penilaian-dokumen/update') }}/'+id);
+                $('#point_penilaian').val(point_penilaian).change();
+                $('#kriteria_penilaian').val(kriteria_penilaian).change();
+                $('#form').attr('action', '{{ url('jurusan/kategori-penilaian-soal/update') }}/'+id);
             }
         });
     });
@@ -171,7 +171,7 @@ $(document).ready( function () {
             var id = $(this).data('id');
             if (confirm("Anda Yakin ingin menghapus data?")){
                 $.ajax({
-                    url : "{{ url('jurusan/kategori-penilaian-dokumen/delete') }}/"+id,
+                    url : "{{ url('jurusan/kategori-penilaian-soal/delete') }}/"+id,
                     success :function () {
                         location.reload();
                     }

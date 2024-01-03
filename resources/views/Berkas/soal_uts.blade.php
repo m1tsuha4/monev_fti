@@ -37,16 +37,12 @@
         </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Dosen Pengampu</b></td>
-            <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama}}</b></td>
+            <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama_pengampu}}</b></td>
         </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Periode Ujian</b></td>
             <td style='width:10%;border-style: solid;padding-left:4px'><b>&nbsp;&nbsp;
-                @if($data[0]->timeline_perkuliahan == 2)
                 UTS
-                @else
-                UAS
-                @endif
             </b></td>
             <td colspan="2" style='width:40%;border-style: solid;padding-left:4px'><b>Tahun Akademik</b></td>
             <td colspan="2" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->tahun}}</b></td>
@@ -69,11 +65,11 @@
         </tr>
         <?php $no=1 ?>
         @foreach($data1 as $d)
-            @if($d->jenis_kelengkapan_berkas->tipe_penilaian == "Format Penulisan Soal")
+            @if($d->kriteria_penilaian == "Format Penulisan Soal")
             <tr style="font-size:11px;text-align: center;">
                 <td style="border-style: solid;">{{$no++}}</td>
-                <td style="border-style: solid;text-align: left;" colspan="2">{{$d->jenis_kelengkapan_berkas->kelengkapan_dokumen}}</td>
-                <td style="border-style: solid;">{{$d->penilaian}}</td>
+                <td style="border-style: solid;text-align: left;" colspan="2">{{$d->point_penilaian}}</td>
+                <td style="border-style: solid;">{{$d->penilaian_soal}}</td>
                 <td style="border-style: solid;" colspan="2">{{$d->keterangan}}</td>
             </tr>
             @endif
@@ -87,11 +83,11 @@
         
         <?php $no=1?>
         @foreach($data1 as $d)
-            @if($d->jenis_kelengkapan_berkas->tipe_penilaian == "Materi Soal")
+            @if($d->kriteria_penilaian == "Materi Soal")
             <tr style="font-size:11px;text-align: center;">
                 <td style="border-style: solid;">{{$no++}}</td>
-                <td style="border-style: solid;text-align: left;" colspan="2">{{$d->jenis_kelengkapan_berkas->kelengkapan_dokumen}}</td>
-                <td style="border-style: solid;">{{$d->penilaian}}</td>
+                <td style="border-style: solid;text-align: left;" colspan="2">{{$d->point_penilaian}}</td>
+                <td style="border-style: solid;">{{$d->penilaian_soal}}</td>
                 <td style="border-style: solid;" colspan="2">{{$d->keterangan}}</td>
             </tr>
             @endif
@@ -116,19 +112,19 @@
                 <span>Tanggal:</span><br>
                 <span>Dosen Verifikator:</span>
                 <div>
-                    <img src="{{ public_path($data1[0]->hasil_verifikasi->ttd_url) }}" width="100px">
+                    <img src="{{ public_path($data[0]->tanda_tangan_verifikator) }}" width="100px">
                 </div>
-                <span>( {{$data1[0]->hasil_verifikasi->dosen_verifikator->nama}} )</span><br>
-                <span>Nip. {{$data1[0]->hasil_verifikasi->dosen_verifikator->nip}}</span>
+                <span>( {{$data[0]->nama_verifikator}} )</span><br>
+                <span>Nip. {{$data[0]->nip_verifikator}}</span>
             </td>
             <td style="border-style: solid;text-align: right;padding-right:5px" colspan=3>
                 <span>Mengetahui</span><br>
                 <span>Ketua GKM</span>
                 <div>
-                    <img src="{{ public_path($data1[0]->hasil_verifikasi->ttd_url1) }}" width="100px">
+                    <img src="{{ public_path($data[0]->tanda_tangan_gkm) }}" width="100px">
                 </div>
-                <span>( {{$gkm->nama}} )</span><br>
-                <span>Nip. {{$gkm->nip}}</span>
+                <span>( {{$gkm->nama_dosen}} )</span><br>
+                <span>Nip. {{$gkm->nip_dosen}}</span>
             </td>
         </tr>
 

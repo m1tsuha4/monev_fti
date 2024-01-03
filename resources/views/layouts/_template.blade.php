@@ -96,9 +96,23 @@
 {{--            </li>--}}
 
             <li class="nav-item">
-                <a class="nav-link" href="{{url('/jurusan/kategori-penilaian')}}">
+                <a class="nav-link" href="{{url('/jurusan/kurikulum')}}">
                     <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Kategori Penilaian</span>
+                    <span>Kurikulum</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/jurusan/kategori-penilaian-dokumen')}}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Kategori Penilaian Dokumen</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{url('/jurusan/kategori-penilaian-soal')}}">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Kategori Penilaian Soal</span>
                 </a>
             </li>
 

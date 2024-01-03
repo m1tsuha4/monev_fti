@@ -111,6 +111,7 @@ class MonitoringController extends Controller
         $data = KelasPerkuliahan::where('id_kelas_perkuliahan',$id)->first();
         $data_soal = BerkasDokumen::where('id_kelas_perkuliahan',$id)->latest()->first();
         // dd($data_soal);
+        // dd($data_soal);
         // $berkas = BerkasDokumen::join('kategoriberkas','kategoriberkas.id','=','berkasdokumens.id_kategori_berkas')->where([['kategori',$data->timeline_perkuliahan],['id_kelas_perkuliahan',$data->id_kelas_perkuliahan]])
         //             ->get();
 
@@ -121,21 +122,21 @@ class MonitoringController extends Controller
             $kategori = JenisKelengkapanDokumen::get();
             return view('Dosen.Verifikator.detail', compact('data','berkas','kategori'));
         }else if($data->timeline_perkuliahan == 2){
-            // $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
+            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $kategori_soal = JenisSoalUjian::get();
             // dd($kategori_soal);
-            return view('Dosen.Verifikator.detail', compact('data','data_soal','berkas_soal','kategori_soal'));
+            return view('Dosen.Verifikator.detail', compact('data','data_soal','berkas','berkas_soal','kategori_soal'));
         }else{
-            // $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
+            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $kategori_soal = JenisSoalUjian::get();
-            return view('Dosen.Verifikator.detail', compact('data','data_soal','berkas_soal','kategori_soal'));
+            return view('Dosen.Verifikator.detail', compact('data','data_soal','berkas','berkas_soal','kategori_soal'));
         }
 //        dd($kategori);
         // echo $berkas;
 
-        // return view('Dosen.Verifikator.detail', compact('data','berkas', 'berkas_soal','kategori'));
+        // return view('Dosen.Verifikator.detail', compact('data','berkas', 'berkas_soal','kategori','kategori_soal'));
     }
 
     public function verifikator_update(Request $request){
@@ -351,8 +352,17 @@ class MonitoringController extends Controller
             ->get();
             // dd($data);
 //        $data1 = HasilVerifikasi::where('id_kelasperkuliahan',$id)->with('dosen_verifikator')->get();
-
-        return view('Ketua_jurusan.laporan_penilaian.detail', compact('data'));
+        $data_uts = DB::table('berkas_soal')
+            ->where('id_kelas_perkuliahan', '=', $id)
+            ->where('nama_soal','=','UTS')
+            ->latest()
+            ->first();
+        $data_uas = DB::table('berkas_soal')
+            ->where('id_kelas_perkuliahan', '=', $id)
+            ->where('nama_soal','=','UAS')
+            ->latest()
+            ->first();
+        return view('Ketua_jurusan.laporan_penilaian.detail', compact('data','data_uts','data_uas'));
     }
 
     // End Jurusan

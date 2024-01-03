@@ -31,7 +31,7 @@
                 <b>Berita Acara Perkuliahan (Setelah UTS)</b>
                 @endif
             </td>            
-        </tr>
+        </tr> 
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Mata Kuliah</b></td>
             <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama_matakuliah}}</b></td>
@@ -114,7 +114,7 @@
                 <span>Tanggal:</span><br>
                 <span>Dosen Verifikator:</span>
                 <div>
-                   
+                    <img src="{{ public_path($data[0]->tanda_tangan_verifikator) }}" width="100px">
                 </div>
                 <span>( {{$data[0]->nama_verifikator}} )</span><br>
                 <span>Nip. {{$data[0]->nip_verifikator}}</span>
@@ -130,10 +130,10 @@
                 <span>Mengetahui</span><br>
                 <span>Ketua GKM</span>
                 <div>
-                    
+                    <img src="{{ public_path($data[0]->tanda_tangan_gkm) }}" width="100px">
                 </div>
-                <span>( {{$gkm->nama}} )</span><br>
-                <span>Nip. {{$gkm->nip}}</span>
+                <span>( {{$gkm->nama_dosen}} )</span><br>
+                <span>Nip. {{$gkm->nip_dosen}}</span>
             </td>
         </tr>
 

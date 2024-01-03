@@ -75,14 +75,7 @@ class KelasPerkuliahanController extends Controller
             if($existingDosenKelas->count()>0){
                 return redirect()->route('jurusan.kelas_perkuliahan')->with('error', 'Data Sudah Tersedia');
             }
-//            $existingKelasPerkuliahan = KelasPerkuliahan::where([
-//                'kode_matakuliah' => $request->matakuliah,
-//                'kelas' => $request->kelas,
-//            ])->get();
-//
-//            if ($existingKelasPerkuliahan->count()>0) {
-//                return redirect()->route('jurusan.kelas_perkuliahan')->with('error', 'Data Sudah Tersedia');
-//            }
+
 
             $KelasPerkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan',$request->kode_kelasperkuliahan)->get();
             if($KelasPerkuliahan->count()>0)
@@ -150,19 +143,6 @@ class KelasPerkuliahanController extends Controller
     // Dosen
 
     public function dosen_index(){
-//        $id = auth()->user()->nip_dosen;
-//        $KelasPerkuliahan = DB::table('kelas_perkuliahans')
-//            ->join('matakuliahs', 'matakuliahs.kode_matakuliah', '=', 'kelas_perkuliahans.kode_matakuliah')
-//            ->join('tahun_akademik', 'tahun_akademik.id_tahun_akademik', '=', 'kelas_perkuliahans.id_tahun_akademik')
-//            ->join('dosen_kelas', 'dosen_kelas.id_kelas_perkuliahan', '=', 'kelas_perkuliahans.id_kelas_perkuliahan')
-//            ->join('dosen','dosen.nip_dosen','=','dosen_kelas.nip_dosen')
-//            ->join('kurikulums','matakuliahs.tahun_kurikulum','=','kurikulums.id')
-//            ->where([
-//                ['dosen_kelas.nip_dosen', '=', $id],
-//                ['tahun_akademik.status', '=', 1]
-//            ])
-//            ->get();
-//        dd($KelasPerkuliahan);
         return view('Dosen.Perkuliahan.index');
     }
 
@@ -179,11 +159,7 @@ class KelasPerkuliahanController extends Controller
                 ['tahun_akademik.status', '=', 1]
             ])
             ->get();
-//        $KelasPerkuliahan = DB::table('kelas_perkuliahans')
-//            ->where([['kelasperkuliahan.nip_dosen','=',$id],['tahun_akademik.status','=',1]])
-//        ->join('matakuliah','matakuliah.kode_matakuliah','=','kelasperkuliahan.kode_matakuliah')
-//        ->join('tahun_akademik','tahun_akademik.id_tahun_akademik','=','kelasperkuliahan.id_tahun_akademik')
-//        ->get();
+
         return response()->json(['data' => $KelasPerkuliahan]);
     }
 
@@ -196,11 +172,13 @@ class KelasPerkuliahanController extends Controller
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
             return view('Dosen.Perkuliahan.detail', compact('kelas','berkas'));
         }else if($kelas->timeline_perkuliahan == 2){
+            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
             $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
-            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas_soal'));
+            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas','berkas_soal'));
         }else{
+            $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
             $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
-            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas_soal'));
+            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas','berkas_soal'));
         }
 //        $kategori = KategoriBerkas::whereNotIn('kategori_berkas',[1])->get();
 //        $berkas = BerkasDokumen::where('id_kelasperkuliahan',$id)->with('kategori_berkas')->get();

@@ -61,16 +61,16 @@
                             <div>{{$data[0]->nama_pengampu}}</div>
                             <div>{{$data[0]->nama_verifikator}}</div><br>
                             @foreach($data as $daa)
-                                @if($daa->timeline_perkuliahan == 1 and $daa->status_kelas_perkuliahan == 2)
-                                <div><button id="bap" data-id="" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat</button></div>
+                                @if($daa->status_kelas_perkuliahan == 2)
+                                <div><button id="bap" data-id="{{$daa->id_kelas_perkuliahan}}" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat</button></div>
                                 @else
                                 <div><button class="btn btn-sm btn-secondary">Tidak Tersedia</button></div>
                                 @endif
                             @endforeach
                             <br>
                             @foreach($data as $daa1)
-                                @if($daa1->timeline_perkuliahan == 3 and $daa1->status_kelas_perkuliahan == 2)
-                                <div><button id="bap1" data-id="" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat</button></div>
+                                @if($daa1->status_kelas_perkuliahan == 2)
+                                <div><button id="bap1" data-id="{{$daa1->id_kelas_perkuliahan}}" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat</button></div>
                                 @else
                                 <div><button class="btn btn-sm btn-secondary">Tidak Tersedia</button></div>
                                 @endif

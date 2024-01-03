@@ -15,7 +15,7 @@ class BerkasDokumen extends Model
 
     protected $rememberTokenName = false;
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     protected $fillable = [
         'id_soal', 'id_kelas_perkuliahan', 'nama_soal', 'file_soal','status','keterangan'

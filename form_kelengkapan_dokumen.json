@@ -1,0 +1,52 @@
+[
+ {
+  "id_jenis_kelengkapan dokumen": "P01",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Capaian Pembelajaran mata kuliah memuat aspek sikap, pengetahuan, dan keterampilan "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P02",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Kemampuan akhir yang direncankan pada tiap tahap pembelajaran untuk memenuhi capaian pembelajaran lulusan "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P03",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Perumusan tujuan\/indicator mendukung capaian pembelajaran "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P04",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Bahan kajian terkait dengan kemampuan yang akan dicapai "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P05",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Kesesuaian pemilihan strategi pembelajaran dengan indicator "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P06",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Kesesuaian sumber belajar\/media dengan  indic"
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P07",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Kesesuaian perencanaan waktu dengan  materi pembelajaran "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P08",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Kesesuaian pengalaman belajar dengan  indicator "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P09",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Butir-butir penilaian sesuai dengan  indicator "
+ },
+ {
+  "id_jenis_kelengkapan dokumen": "P10",
+  "tipe_penilaian": "KelengkapanDokumen RPS",
+  "point_penilaian_kelengkapan_dokumen": "Keterkinian referensi "
+ }
+]

@@ -16,8 +16,8 @@ class CreateFormValidasiSoalujianTable extends Migration
         Schema::create('form_validasi_soalujian', function (Blueprint $table) {
             $table->engine = 'InnoDB'; // <- add this
             $table->string('id_form_validasisoal')->length(3)->primary();
-            $table->string('kriteria_penilaian')->length(50);
-            $table->string('point_penilaian')->length(50);
+            $table->string('kriteria_penilaian');
+            $table->string('point_penilaian');
             $table->timestamps();
         });
     }

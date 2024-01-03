@@ -16,8 +16,8 @@ class CreateFormKelengkapanDokumenTable extends Migration
         Schema::create('form_kelengkapan_dokumen', function (Blueprint $table) {
             $table->engine = 'InnoDB'; // <- add this
             $table->string('id_jenis_kelengkapan_dokumen')->length(3)->primary();
-            $table->string('tipe_penilaian')->length(50);
-            $table->string('point_penilaian_kelengkapan_dokumen')->length(150);
+            $table->string('tipe_penilaian');
+            $table->string('point_penilaian_kelengkapan_dokumen');
             $table->timestamps();
         });
     }

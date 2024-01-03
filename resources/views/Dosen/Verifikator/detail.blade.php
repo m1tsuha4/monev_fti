@@ -114,28 +114,34 @@
                             @endforelse
                             @endif
                             @if(isset($berkas_soal))
-                          
+                            @forelse($berkas_soal as $bs)
                                 <tr>
                                     <td>{{$no++}}</td>
-                                    <td>Berkas Soal {{$data_soal->nama_soal}}</td>
+                                    <td>Berkas Soal {{$bs->nama_soal}}</td>
                                     {{--                                        <td>{{$b->tanggal_upload}}</td>--}}
                                     <td class="text-center">
-                                        <a id="pdf" href="#" data-id="{{$data_soal->id_soal }}" data-id1="{{$data_soal->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
+                                        <a id="pdf" href="#" data-id="{{$bs->id_soal }}" data-id1="{{$bs->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
                                     </td>
                                     <td class="text-center">
-                                        @if($data_soal->status == 1)
+                                        @if($bs->status == 1)
                                             <span class="badge badge-warning">Need Action</span>
-                                        @elseif($data_soal->status == 2)
+                                        @elseif($bs->status == 2)
                                             <span class="badge badge-success">Accept</span>
                                         @else
                                             <span class="badge badge-danger">Rejected</span>
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a style="text-decoration:none" href="#" data-id="{{$data_soal->id_soal}}" data-nama="{{$data_soal->id_kelas_perkuliahan}}" data-id1="{{$data_soal->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
+                                        <a style="text-decoration:none" href="#" data-id="{{$bs->id_soal}}" data-nama="{{$bs->id_kelas_perkuliahan}}" data-id1="{{$bs->id_kelas_perkuliahan}}" id="add" class="text-secondary" title="Detail"><i class="fa fa-ellipsis-h"></i></a>
                                     </td>
                                 </tr>
-                           
+                            @empty
+                                <tr class="text-center">
+                                    <td colspan="6">Tidak Ada Ada</td>
+                                </tr>
+                            @endforelse
+                                
+                        
                             @endif
                             </tbody>
                         </table>
@@ -241,7 +247,7 @@
 
                     <div class="form-group" id="div_nama">
                         {{Form::label('text', 'Kategori Penilaian :', ['class' => 'awesome'])}}
-                        <input type="text" name="kategori_penilaian[]" id="kategori_penilaian" value="{{$k->kriteria_penilaian}}" class="form-control" readonly>
+                        <input type="text" name="kategori_penilaian[]" id="kategori_penilaian" value="{{$k->point_penilaian}}" class="form-control" readonly>
                         <input type="hidden" name="id_jenis_penilaian[]" id="id_jenis_penilaian" value="{{$k->id_form_validasisoal }}">
                     </div>
 

@@ -1,0 +1,97 @@
+[
+    {
+     "id_form_validasisoal": "S01",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " Nama mata kuliah "
+    },
+    {
+     "id_form_validasisoal": "S02",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " SMS\/Semester "
+    },
+    {
+     "id_form_validasisoal": "S03",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": "Prodi "
+    },
+    {
+     "id_form_validasisoal": "S04",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " Waktu pelaksanaan ujian "
+    },
+    {
+     "id_form_validasisoal": "S05",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " Nama dosen pengampu "
+    },
+    {
+     "id_form_validasisoal": "S06",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " Kertas soal menggunakan kop Universitas \/ Fakultas \/  Jurusan "
+    },
+    {
+     "id_form_validasisoal": "S07",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " Bentuk ujian (terbuka \/ tertutup) "
+    },
+    {
+     "id_form_validasisoal": "S08",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": "Cara mengerjakan soal (boleh tidak berurut nomor atau tidak) "
+    },
+    {
+     "id_form_validasisoal": "S09",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": "Sanksi "
+    },
+    {
+     "id_form_validasisoal": "S10",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": "Penggunaan telepon cellular, serta alat lain pada saat ujian (boleh atau tidak) "
+    },
+    {
+     "id_form_validasisoal": "S11",
+     "kriteria_penilaian": "Format Penulisan Soal",
+     "point_penilaian": " Pada penutup, terdapat himbauan moral, seperti:  memberikan semangat untuk berlaku jujur dll "
+    },
+    {
+     "id_form_validasisoal": "S12",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": "Kesuaian materi soal dengan RPS "
+    },
+    {
+     "id_form_validasisoal": "S13",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": " Nomor urut soal berdasarkan tingkat kesulitas "
+    },
+    {
+     "id_form_validasisoal": "S14",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": " Soal ujian mencakup kompetensi\/learning outcome yang tercantum di dalam RPS "
+    },
+    {
+     "id_form_validasisoal": "S15",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": " Materi soal yang diujikan sesuai dengan periode ujian  (UTS\/UAS) "
+    },
+    {
+     "id_form_validasisoal": "S16",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": "Setiap soal mencantumkan bobot nilai"
+    },
+    {
+     "id_form_validasisoal": "S17",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": "Bobot nilai sesuai dengan kesulitas soal"
+    },
+    {
+     "id_form_validasisoal": "S18",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": "Kesesuaian soal dengan CPMK"
+    },
+    {
+     "id_form_validasisoal": "S19",
+     "kriteria_penilaian": "Materi Soal",
+     "point_penilaian": "Memiliki Grading Checklist"
+    }
+]

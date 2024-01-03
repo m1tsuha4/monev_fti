@@ -69,7 +69,7 @@
                             @endforeach
                             <br>
                             @foreach($data as $daa1)
-                                @if($daa1->status_kelas_perkuliahan == 2)
+                                @if($daa1->timeline_perkuliahan > 1 && $daa1->status_kelas_perkuliahan == 2)
                                 <div><button id="bap1" data-id="{{$daa1->id_kelas_perkuliahan}}" class="btn btn-sm btn-info"><i class="fa fa-file"></i> Lihat</button></div>
                                 @else
                                 <div><button class="btn btn-sm btn-secondary">Tidak Tersedia</button></div>

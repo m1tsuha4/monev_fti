@@ -112,6 +112,44 @@
                                 <td colspan="7">Tidak Ada Data</td>
                             </tr>
                             @endforelse
+                            @forelse($soal_uts as $d)
+                            <tr>
+                               <td>{{$no++}}</td>
+                               <td>{{$d->point_penilaian}}</td>
+                               <td>{{$d->kriteria_penilaian}} UTS</td>
+                               <td>{{$d->penilaian_soal}}</td>
+                               <td>
+                                    @if($d->keterangan == null)
+                                    -
+                                    @else
+                                    {{$d->keterangan}}
+                                    @endif
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="7">Tidak Ada Data</td>
+                            </tr>
+                            @endforelse
+                            @forelse($soal_uas as $d)
+                            <tr>
+                               <td>{{$no++}}</td>
+                               <td>{{$d->point_penilaian}}</td>
+                               <td>{{$d->kriteria_penilaian}} UAS</td>
+                               <td>{{$d->penilaian_soal}}</td>
+                               <td>
+                                    @if($d->keterangan == null)
+                                    -
+                                    @else
+                                    {{$d->keterangan}}
+                                    @endif
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="7">Tidak Ada Data</td>
+                            </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>

@@ -145,7 +145,7 @@
                 <span>Tanggal:</span><br>
                 <span>Dosen Verifikator:</span>
                 <div>
-                    <img src="{{ public_path($data[0]->tanda_tangan_verifikator) }}" width="100px">
+                    <img src="{{ public_path('storage/'.$data[0]->tanda_tangan_verifikator) }}" width="100px">
                 </div>
                 <span>( {{$data[0]->nama_verifikator}} )</span><br>
                 <span>Nip. {{$data[0]->nip_verifikator}}</span>
@@ -154,7 +154,7 @@
                 <span>Mengetahui</span><br>
                 <span>Ketua GKM</span>
                 <div>
-                    <img src="{{ public_path($data[0]->tanda_tangan_gkm) }}" width="100px">
+                    <img src="{{ public_path('storage/'.$data[0]->tanda_tangan_gkm) }}" width="100px">
                 </div>
                 <span>( {{$gkm->nama_dosen}} )</span><br>
                 <span>Nip. {{$gkm->nip_dosen}}</span>

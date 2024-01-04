@@ -183,7 +183,12 @@ class MonitoringController extends Controller
         $file = $request->file('file');
             if ($file != null){
                 if ($file->isValid()) {
-                    $path = $file->store('public/ttd');
+                    $extension = $file->getClientOriginalExtension();
+                    $hash = hash('sha256', time());
+                    $filename = $hash . '.' . $extension;
+                
+                    $path = $file->storeAs('ttd', $filename, 'public');
+            
                     KelasPerkuliahan::where('id_kelas_perkuliahan', $request->id_hasil_verifikator)->update([
                         'status' => 2,
                         'tanggal_verifikasi' => $now,
@@ -248,7 +253,12 @@ class MonitoringController extends Controller
         // dd($request);
         if ($file != null){
             if ($file->isValid()) {
-                $path = $file->store('public/ttd');
+                $extension = $file->getClientOriginalExtension();
+                $hash = hash('sha256', time());
+                $filename = $hash . '.' . $extension;
+            
+                $path = $file->storeAs('ttd', $filename, 'public');
+               
                 KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->update([
                     'tanda_tangan_gkm' => $path
                 ]);

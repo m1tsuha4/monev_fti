@@ -20,7 +20,7 @@
             <td colspan="5" style='font-size:12px;border-style: solid;padding-top:0px'>
                 <span>&nbsp;&nbsp;&nbsp;UNIVERSITAS ANDALAS</span><br>
                 <b>&nbsp;&nbsp;&nbsp;FAKULTAS TEKNOLOGI INFORMASI</b><br>
-                <b>&nbsp;&nbsp;&nbsp;JURUSAN SISTEM INFORMASI</b>
+                <b>&nbsp;&nbsp;&nbsp;DEPARTEMEN SISTEM INFORMASI</b>
             </td>
         </tr>
         <tr style="font-size:13px">

@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DosenKelas;
-use Illuminate\Http\Request;
-use App\Models\KelasPerkuliahan;
-use App\Models\Monitoring;
-use App\Models\HasilVerifikasi;
-use App\Models\BerkasDokumen;
-use App\Models\JenisKelengkapanDokumen;
-use App\Models\DetailHasilVerifikator;
-use App\Models\JenisSoalUjian;
-use App\Models\TipePenilaianSoal;
-use Carbon\Carbon;
 use DB;
+use Carbon\Carbon;
+use App\Models\DosenKelas;
+use App\Models\Monitoring;
+use Illuminate\Http\Request;
+use App\Models\BerkasDokumen;
+use App\Models\JenisSoalUjian;
+use App\Models\HasilVerifikasi;
+use App\Models\KelasPerkuliahan;
+use App\Models\TipePenilaianSoal;
+use App\Models\DetailHasilVerifikator;
+use App\Models\JenisKelengkapanDokumen;
+use Illuminate\Support\Facades\Storage;
 
 class MonitoringController extends Controller
 {
@@ -76,14 +77,25 @@ class MonitoringController extends Controller
 
                 if ($countMonitoring >= 8 && $countMonitoring < 16) {
                     // Update the kelas_perkuliahan table with timeline = 2
-                    KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 2]);
+                    $kelas_perkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->first();
+                    $this->deleteFileIfExists('public/'.$kelas_perkuliahan->tanda_tangan_gkm);
+                    KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 2,'tanda_tangan_gkm'=> null]);
                 } elseif ($countMonitoring >= 16) {
                     // Update the kelas_perkuliahan table with timeline = 3
-                    KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 3]);
+                    $kelas_perkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->first();
+                    $this->deleteFileIfExists($kelas_perkuliahan->tanda_tangan_gkm);
+                    KelasPerkuliahan::where('public/'.'id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 3,'tanda_tangan_gkm'=> null]);
                 }
 
                 return redirect()->route('dosen.kelas-perkuliahan')->with('success', 'Data Berhasil Di Simpan');
             }
+        }
+    }
+    
+    private function deleteFileIfExists($path)
+    {
+        if ($path && Storage::exists($path)) {
+            Storage::delete($path);
         }
     }
 

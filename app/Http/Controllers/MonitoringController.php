@@ -83,8 +83,8 @@ class MonitoringController extends Controller
                 } elseif ($countMonitoring >= 16) {
                     // Update the kelas_perkuliahan table with timeline = 3
                     $kelas_perkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->first();
-                    $this->deleteFileIfExists($kelas_perkuliahan->tanda_tangan_gkm);
-                    KelasPerkuliahan::where('public/'.'id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 3,'tanda_tangan_gkm'=> null]);
+                    $this->deleteFileIfExists('public/'.$kelas_perkuliahan->tanda_tangan_gkm);
+                    KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 3,'tanda_tangan_gkm'=> null]);
                 }
 
                 return redirect()->route('dosen.kelas-perkuliahan')->with('success', 'Data Berhasil Di Simpan');

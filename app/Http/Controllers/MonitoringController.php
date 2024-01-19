@@ -75,12 +75,16 @@ class MonitoringController extends Controller
                 ]);
                 $countMonitoring = Monitoring::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->count();
 
-                if ($countMonitoring >= 8 && $countMonitoring < 16) {
+                if ($countMonitoring == 7) {
                     // Update the kelas_perkuliahan table with timeline = 2
                     $kelas_perkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->first();
                     $this->deleteFileIfExists('public/'.$kelas_perkuliahan->tanda_tangan_gkm);
                     KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 2,'tanda_tangan_gkm'=> null]);
-                } elseif ($countMonitoring >= 16) {
+                } elseif ($countMonitoring == 8) {
+                    // Update the kelas_perkuliahan table with timeline = 3
+                    $kelas_perkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->first();
+                    KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->update(['timeline_perkuliahan' => 1]);
+                } elseif ($countMonitoring >= 15) {
                     // Update the kelas_perkuliahan table with timeline = 3
                     $kelas_perkuliahan = KelasPerkuliahan::where('id_kelas_perkuliahan', $request->hasil_verifikasi)->first();
                     $this->deleteFileIfExists('public/'.$kelas_perkuliahan->tanda_tangan_gkm);
@@ -91,7 +95,7 @@ class MonitoringController extends Controller
             }
         }
     }
-    
+
     private function deleteFileIfExists($path)
     {
         if ($path && Storage::exists($path)) {
@@ -126,22 +130,17 @@ class MonitoringController extends Controller
     {
         $data = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->first();
         $data_soal = BerkasDokumen::where('id_kelas_perkuliahan', $id)->latest()->first();
-        // dd($data_soal);
-        // dd($data_soal);
-        // $berkas = BerkasDokumen::join('kategoriberkas','kategoriberkas.id','=','berkasdokumens.id_kategori_berkas')->where([['kategori',$data->timeline_perkuliahan],['id_kelas_perkuliahan',$data->id_kelas_perkuliahan]])
-        //             ->get();
 
         if ($data->timeline_perkuliahan == 1) {
             //            $berkas = BerkasDokumen::where([['id_kelasperkuliahan',$data->id_kelasperkuliahan],['id_kategori_berkas','!=','B04'],['id_kategori_berkas','!=','B05']])->with('kategori_berkas')->get();
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
-            // $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
+            $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $kategori = JenisKelengkapanDokumen::get();
-            return view('Dosen.Verifikator.detail', compact('data', 'berkas', 'kategori'));
+            return view('Dosen.Verifikator.detail', compact('data', 'berkas', 'kategori','berkas_soal'));
         } else if ($data->timeline_perkuliahan == 2) {
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $berkas_soal = BerkasDokumen::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
             $kategori_soal = JenisSoalUjian::get();
-            // dd($kategori_soal);
             return view('Dosen.Verifikator.detail', compact('data', 'data_soal', 'berkas', 'berkas_soal', 'kategori_soal'));
         } else {
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $data->id_kelas_perkuliahan)->get();
@@ -149,10 +148,7 @@ class MonitoringController extends Controller
             $kategori_soal = JenisSoalUjian::get();
             return view('Dosen.Verifikator.detail', compact('data', 'data_soal', 'berkas', 'berkas_soal', 'kategori_soal'));
         }
-        //        dd($kategori);
-        // echo $berkas;
 
-        // return view('Dosen.Verifikator.detail', compact('data','berkas', 'berkas_soal','kategori','kategori_soal'));
     }
 
     public function verifikator_update(Request $request)

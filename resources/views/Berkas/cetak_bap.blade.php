@@ -10,7 +10,7 @@
     .inner-image {
         position: absolute;
     }
-    
+
 </style>
 </head>
 <body>
@@ -30,8 +30,8 @@
                 @else
                 <b>Berita Acara Perkuliahan (Setelah UTS)</b>
                 @endif
-            </td>            
-        </tr> 
+            </td>
+        </tr>
         <tr style="font-size:10px">
             <td style='width:10%;border-style: solid;padding-left:4px'><b>Mata Kuliah</b></td>
             <td colspan="5" style='border-style: solid;padding-top:0px'><b>&nbsp;&nbsp;&nbsp;{{$data[0]->nama_matakuliah}}</b></td>
@@ -55,7 +55,7 @@
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;" colspan=6>
                 <b>PETUNJUK</b>
-            </td>            
+            </td>
         </tr>
         <tr style="font-size:10px;text-align: left;">
             <td colspan="6" style='width:100%;border-style: solid;padding-left:8px'>
@@ -68,26 +68,26 @@
     </table>
 
     <table style="width: 100%">
-        <?php $no=1 ?>        
+        <?php $no=1 ?>
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;">
                 <b>Pertemuan ke-</b>
             </td>
             <td style="border-style: solid;background-color:silver;text-align: center;">
                 <b>Waktu Pelaksanaan</b>
-            </td>  
+            </td>
             <td style="border-style: solid;background-color:silver;text-align: center;">
                 <b>Rencana Pembelajaran Semester</b>
-            </td>  
+            </td>
             <td style="border-style: solid;background-color:silver;text-align: center;">
                 <b>Realisasi Pembelajaran Semester</b>
-            </td>  
+            </td>
             <td style="border-style: solid;background-color:silver;text-align: center;">
                 <b>Assesmen (Tugas/Kuis)</b>
-            </td>  
+            </td>
             <td style="border-style: solid;background-color:silver;text-align: center;">
                 <b>Jumlah MHS</b>
-            </td>  
+            </td>
         </tr>
         <?php $no=1?>
         @foreach($data1 as $d)
@@ -101,13 +101,13 @@
             <td style="border-style: solid;">{{$d->rencana_pembelajaran}}</td>
             <td style="border-style: solid;">{{$d->realisasi_pembelajaran}}</td>
             <td style="border-style: solid;">{{$d->assesment}}</td>
-            <td style="border-style: solid;">{{$d->jumlah_mahasiswa}} Orang</td>
+            <td style="border-style: solid;">{{$d->jumlah_mahasiswa_hadir}} Orang</td>
         </tr>
         @endforeach
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;" colspan=6>
                 <b>VERIFIKASI GKM</b>
-            </td>            
+            </td>
         </tr>
         <tr style="font-size:11px">
             <td style="width:30%;border-style: solid;text-align: left;padding-left:5px" colspan=2>
@@ -125,7 +125,7 @@
                 @else
                     <span>{{$data[0]->catatan}}</span>
                 @endif
-            </td>    
+            </td>
             <td style="width:30%;border-style: solid;text-align: right;padding-right:5px" colspan=2>
                 <span>Mengetahui</span><br>
                 <span>Ketua GKM</span>

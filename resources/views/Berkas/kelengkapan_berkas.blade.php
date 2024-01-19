@@ -10,7 +10,7 @@
     .inner-image {
         position: absolute;
     }
-    
+
 </style>
 </head>
 <body>
@@ -46,7 +46,7 @@
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;" colspan=6>
                 <b>KELENGKAPAN DOKUMEN UNTUK PROSES PEMBELAJARAN</b>
-            </td>            
+            </td>
         </tr>
         <tr style="font-size:12px;text-align: center;">
             <th style="border-style: solid;">No.</th>
@@ -75,7 +75,7 @@
             <td style="border-style: solid;">{{$no++}}</td>
             <td style="border-style: solid;text-align: left;" colspan="2">
                 @if($data[0]->file_kontrak_perkuliahan)
-                    Berita Acara Perkuliahan (BAP)
+                    Kontrak Perkuliahan
                 @endif
             </td>
             <td style="border-style: solid;">
@@ -108,7 +108,7 @@
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;" colspan=6>
                 <b>KELENGKAPAN DOKUMEN RPS</b>
-            </td>            
+            </td>
         </tr>
         <tr style="font-size:12px;text-align: center;">
             <th style="border-style: solid;">No.</th>
@@ -116,7 +116,7 @@
             <th style="border-style: solid;">Penilaian</th>
             <th style="border-style: solid;" colspan="2">Keterangan</th>
         </tr>
-        
+
         <?php $no=1?>
         @foreach($data1 as $d)
         <tr style="font-size:12px;text-align: center;">
@@ -129,7 +129,7 @@
         <tr style="font-size:13px">
             <td style="border-style: solid;background-color:silver;text-align: center;" colspan=6>
                 <b>HASIL PENILAIAN DAN REKOMENDASI TINDAKAN PERBAIKAN</b>
-            </td>            
+            </td>
         </tr>
         <tr style="font-size:13px">
             <td style="border-style: solid;text-align: center;" colspan=6>
@@ -138,7 +138,7 @@
                 @else
                     <span>{{$data[0]->catatan}}</span>
                 @endif
-            </td>            
+            </td>
         </tr>
         <tr style="font-size:11px">
             <td style="border-style: solid;text-align: left;padding-left:5px" colspan=3>

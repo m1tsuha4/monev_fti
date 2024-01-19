@@ -170,7 +170,8 @@ class KelasPerkuliahanController extends Controller
 
         if($kelas->timeline_perkuliahan == 1){
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
-            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas'));
+            $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
+            return view('Dosen.Perkuliahan.detail', compact('kelas','berkas','berkas_soal'));
         }else if($kelas->timeline_perkuliahan == 2){
             $berkas = KelasPerkuliahan::where('id_kelas_perkuliahan', $id)->get();
             $berkas_soal = DB::table('berkas_soal')->where('id_kelas_perkuliahan',$id)->get();
@@ -182,7 +183,7 @@ class KelasPerkuliahanController extends Controller
         }
 //        $kategori = KategoriBerkas::whereNotIn('kategori_berkas',[1])->get();
 //        $berkas = BerkasDokumen::where('id_kelasperkuliahan',$id)->with('kategori_berkas')->get();
-        
+
     }
 
     // End Dosen

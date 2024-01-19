@@ -118,7 +118,7 @@
                                         <td>{{$da->jam_mulai}}</td>
                                         <td>{{$da->jam_selesai}}</td>
                                         <td class="text-center">
-                                            <a id="pdf" href="#" data-id="{{$da->id_kelas_perkuliahan}}"><i class="fa fa-file"></i></a>
+                                            <a id="pdf" href="#" data-id="{{$da->pertemuan}}"><i class="fa fa-file"></i></a>
                                         </td>
                                     </tr>
 

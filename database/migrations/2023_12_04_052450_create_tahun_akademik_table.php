@@ -20,6 +20,7 @@ class CreateTahunAkademikTable extends Migration
             $table->string('semester')->length(1);
             $table->integer('status');
             $table->timestamps();
+            $table->unique(['tahun','semester'],'UC_tahun_akademik');
         });
     }
 

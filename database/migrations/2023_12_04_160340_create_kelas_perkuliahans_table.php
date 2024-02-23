@@ -18,7 +18,7 @@ class CreateKelasPerkuliahansTable extends Migration
             $table->integer('id_kelas_perkuliahan');
             $table->string('kode_matakuliah')->length(10);
             $table->foreignId('id_tahun_akademik');
-            $table->string('kelas')->unique();
+            $table->string('kelas');
             $table->string('keterangan')->length(50)->nullable();
             $table->string('file_rps')->nullable();
             $table->string('file_kontrak_perkuliahan')->nullable();
@@ -32,7 +32,8 @@ class CreateKelasPerkuliahansTable extends Migration
             $table->string('catatan')->length(50)->nullable();
             $table->string('komentar_perbaikan')->length(50)->nullable();
             $table->timestamps();
-            $table->primary(['id_kelas_perkuliahan', 'kode_matakuliah', 'id_tahun_akademik', 'kelas'], 'pk_kelasperkuliahan');
+            $table->primary(['id_kelas_perkuliahan'], 'pk_kelasperkuliahan');
+            $table->unique(['kode_matakuliah','id_tahun_akademik','kelas'],'UC_kelas_perkuliahan');
         });
 
         Schema::table('kelas_perkuliahans', function (Blueprint $table) {

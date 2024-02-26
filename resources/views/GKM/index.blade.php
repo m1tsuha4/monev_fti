@@ -30,6 +30,7 @@
                                     <th>No</th>
                                     <th>Tahun Ajaran</th>
                                     <th>Matakuliah</th>
+                                    <th>Kelas</th>
                                     <th>Dosen Verifikator</th>
                                     <th>Kurikulum</th>
                                     <th>Tanggal</th>
@@ -46,6 +47,7 @@
                                 <td>{{$no++}}</td>
                                 <td>{{$d->tahun}}</td>
                                 <td>{{$d->nama_matakuliah}}</td>
+                                <td>{{$d->kelas}}</td>
                                 <td>{{$d->nama_dosen}}</td>
                                 <td>{{$d->tahun_kurikulum}}</td>
                                 <td>{{$d->tanggal_verifikasi}}</td>
